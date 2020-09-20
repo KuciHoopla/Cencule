@@ -1,0 +1,31 @@
+.card {
+    border: none;
+
+}
+
+.chat {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.chat li {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted palevioletred;
+}
+
+.rounded-circle { 
+    height: 50px;
+    width: 50px;
+
+}
+
+.card-body {
+    overflow-y: scroll;
+    height: 400px;
+}
+
+.chat-img { 
+    margin: 5px;
+}
