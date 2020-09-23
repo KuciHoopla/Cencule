@@ -40,6 +40,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 export function tokenGetter() {
@@ -47,7 +48,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     NavComponent,
     HomeComponent,
@@ -59,8 +60,9 @@ export function tokenGetter() {
     MemberDetailComponent,
     MemberEditComponent,
     PhotoEditorComponent,
-    MemberMessagesComponent
-  ],
+    MemberMessagesComponent,
+    FooterComponent
+   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

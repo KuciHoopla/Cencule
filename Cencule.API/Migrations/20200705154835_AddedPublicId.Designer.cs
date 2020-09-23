@@ -18,7 +18,7 @@ namespace Cencule.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.3");
 
-            modelBuilder.Entity("DatingApp.API.Models.Photo", b =>
+            modelBuilder.Entity("Cencule.API.Models.Photo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,7 +49,7 @@ namespace Cencule.API.Migrations
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("DatingApp.API.Models.User", b =>
+            modelBuilder.Entity("Cencule.API.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -99,7 +99,7 @@ namespace Cencule.API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("DatingApp.API.Models.Value", b =>
+            modelBuilder.Entity("Cencule.API.Models.Value", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -113,9 +113,9 @@ namespace Cencule.API.Migrations
                     b.ToTable("Values");
                 });
 
-            modelBuilder.Entity("DatingApp.API.Models.Photo", b =>
+            modelBuilder.Entity("Cencule.API.Models.Photo", b =>
                 {
-                    b.HasOne("DatingApp.API.Models.User", "User")
+                    b.HasOne("Cencule.API.Models.User", "User")
                         .WithMany("Photos")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

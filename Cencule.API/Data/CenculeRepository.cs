@@ -43,6 +43,14 @@ namespace Cencule.API.Data
             return photo;
         }
 
+        public async Task<IEnumerable<Photo>> GetPhotos()
+        {
+            var photos = _context.Photos.OrderByDescending(p => p.DateAdded)
+                .ToListAsync();
+            
+            return await photos;
+        }
+
         public async Task<User> GetUser(int id)
         {
             var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);

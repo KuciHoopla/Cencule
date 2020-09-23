@@ -18,7 +18,7 @@ namespace Cencule.API.Helpers
             .ForMember(dest => dest.PhotoUrl, opt =>
                 opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url))
                 .ForMember(dest => dest.Age, opt =>
-                opt.MapFrom(src => src.DateOfBirth.CalculatingAge()));  
+                opt.MapFrom(src => src.DateOfBirth.CalculatingAge()));
             CreateMap<Photo, PhotosForDetailedDTO>();
             CreateMap<UserForUpdateDto, User>();
             CreateMap<Photo, PhotoForReturnDto>();
@@ -26,9 +26,9 @@ namespace Cencule.API.Helpers
             CreateMap<UserForRegisterDto, User>();
             CreateMap<MessageForCreationDto, Message>().ReverseMap();
             CreateMap<Message, MessageToReturnDto>()
-                .ForMember(m => m.SenderPhotoUrl, opt => 
+                .ForMember(m => m.SenderPhotoUrl, opt =>
                     opt.MapFrom(u => u.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
-                .ForMember(m => m.RecipientPhotoUrl, opt => 
+                .ForMember(m => m.RecipientPhotoUrl, opt =>
                     opt.MapFrom(u => u.Recipient.Photos.FirstOrDefault(p => p.IsMain).Url));
 
         }

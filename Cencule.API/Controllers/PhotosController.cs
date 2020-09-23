@@ -33,10 +33,9 @@ namespace Cencule.API.Controllers
 
             Account acc = new Account(
                 _cloudinaryConfig.Value.CloudName,
-    _cloudinaryConfig.Value.ApiKey,
-    _cloudinaryConfig.Value.ApiSecret);
-
-            _cloudinary = new Cloudinary(acc);
+                _cloudinaryConfig.Value.ApiKey,
+                _cloudinaryConfig.Value.ApiSecret);
+                _cloudinary = new Cloudinary(acc);
 
         }
         [HttpGet("{id}", Name = "GetPhoto")]
@@ -90,12 +89,10 @@ namespace Cencule.API.Controllers
                 return CreatedAtRoute("GetPhoto", new { userId = userId, id = photo.Id }, photoToReturn);
             }
             return BadRequest("Colud not add the photo");
-
-
         }
 
         [HttpPost("{id}/setMain")]
-        public async Task<IActionResult> SetMainPhoto (int userId, int id)
+        public async Task<IActionResult> SetMainPhoto(int userId, int id)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -135,7 +132,8 @@ namespace Cencule.API.Controllers
             if (photoFromRepo.IsMain)
                 return BadRequest("This is main photo");
 
-            if (photoFromRepo.PublicId != null){
+            if (photoFromRepo.PublicId != null)
+            {
                 var deleteParams = new DeletionParams(photoFromRepo.PublicId);
 
                 var result = _cloudinary.Destroy(deleteParams);
@@ -147,7 +145,7 @@ namespace Cencule.API.Controllers
 
             if (photoFromRepo.PublicId == null)
             {
-                    _repo.Delete(photoFromRepo);
+                _repo.Delete(photoFromRepo);
 
             }
 
