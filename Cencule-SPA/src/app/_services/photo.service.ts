@@ -3,9 +3,9 @@ import { CoreEnvironment } from '@angular/compiler/src/compiler_facade_interface
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Photos } from '../_models/photos';
+
 import { PaginatedResult } from '../_models/pagination';
-import { map } from 'rxjs/operators';
+import { delay, map, share } from 'rxjs/operators';
 import { Message } from '../_models/message';
 import { PhotoWall } from '../_models/photoWall';
 
@@ -17,10 +17,9 @@ export class PhotoService {
 
   constructor(private http: HttpClient) {}
 
-  getPhotos(){
+  getPhotos(): Observable<PhotoWall[]> {
       return this.http
-      .get<Photos>(this.baseUrl + 'photos')
-      
+      .get<PhotoWall[]>(this.baseUrl + 'photos').pipe(share(), delay(2000)); 
       
   }
 }

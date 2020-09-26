@@ -12,9 +12,14 @@ import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
+import { PhotosResolver } from './_resolvers/photos.resolver';
+
 
 export const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', 
+  component: HomeComponent,
+  resolve: { photoWall: PhotosResolver }, 
+  },
   {
     /* all children components will be protected to type in url directly by urlroute,
     if you want protect some route just put it to the list children
@@ -42,7 +47,11 @@ export const appRoutes: Routes = [
       },
       { path: 'lists', component: ListsComponent, resolve: {users: ListsResolver} },
       { path: 'messages', component: MessagesComponent, resolve: {messages: MessagesResolver} },
-    ],
+    
+      ],
+    
+      
   },
+
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

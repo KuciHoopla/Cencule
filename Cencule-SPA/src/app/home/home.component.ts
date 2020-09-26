@@ -5,8 +5,6 @@ import { NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { NgxGalleryImage } from '@kolkov/ngx-gallery';
 import { NgxGalleryAnimation } from '@kolkov/ngx-gallery';
 import { environment } from 'src/environments/environment';
-import { Photos } from '../_models/photos';
-
 import { PhotoWall } from '../_models/photoWall';
 import { PhotoService } from '../_services/photo.service';
 
@@ -18,11 +16,8 @@ import { PhotoService } from '../_services/photo.service';
 export class HomeComponent implements OnInit {
   registerMode = false;
   galleryOptions: NgxGalleryOptions[];
-  galleryImages: any;
-  photos: Photos;
-  baseUrl = environment.apiUrl;
-  
-
+  galleryImages: NgxGalleryImage[];
+  photos: PhotoWall[];
 
   constructor(
     private http: HttpClient,
@@ -32,10 +27,10 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data) => {
-      // tslint:disable-next-line: no-string-literal
-      this.photos = data['photos'];
-    });
+    this.route.data.subscribe((data: { photoWall: PhotoWall[]}) => {this.photos = data.photoWall});
+    
+    
+
     this.galleryOptions = [
       {
         width: '500px',
@@ -47,22 +42,31 @@ export class HomeComponent implements OnInit {
       },
     ];
 
-    this.galleryImages = this.photoService.getPhotos();
+    this.galleryImages = this.getImages();
+    console.log(this.galleryImages)
+
+
   }
 
-  // registerToggle() {
-  //   this.registerMode = true;
-  // }
+  registerToggle() {
+    this.registerMode = true;
+  }
 
-  // cancelRegisterMode(registerMode: boolean) {
-  //   this.registerMode = registerMode;
-  // }
-  getImages(){
-  var imageUrls = [];
-  for (var photo of this.photos.photos) {
-    imageUrls.push({
-      url: photo.url,
+  cancelRegisterMode(registerMode: boolean) {
+    this.registerMode = registerMode;
+  }
+ 
+
+getImages() {
+  const imageUrls = [];
+  for (const photo of this.photos) {
+    imageUrls.push({  
+      small: photo.url,
+      medium: photo.url,
+      big: photo.url,
+      description: photo.description
     });
+    
   }
   return imageUrls;
 }
