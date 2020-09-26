@@ -30,6 +30,7 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { AlertifyService } from './_services/alertify.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
+import { PhotoService } from './_services/photo.service';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
@@ -93,6 +94,7 @@ export function tokenGetter() {
     AlertifyService,
     AuthGuard,
     UserService,
+    PhotoService,
     MemberDetailResolver,
     MemberListResolver,
     MemberEditResolver,

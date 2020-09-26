@@ -3,7 +3,7 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { PhotoService } from './photo.service';
 
-describe('Service: Photo', () => {
+describe('Service: Photos', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [PhotoService]
