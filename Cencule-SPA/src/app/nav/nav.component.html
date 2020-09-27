@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
   <div class="container">
     <a class="navbar-brand" [routerLink]="['/home']">Cencule</a>
 
@@ -13,6 +13,7 @@
         <a class="nav-link" [routerLink]="['/messages']">Messeges</a>
       </li>
     </ul>
+    <app-register-block class="register-block"></app-register-block>
 
     <div *ngIf="loggedIn()" class="dropdown" dropdown>
       <span class="mr-2">

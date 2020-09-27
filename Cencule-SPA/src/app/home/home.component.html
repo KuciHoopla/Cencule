@@ -1,31 +1,13 @@
-<div class="container mt-5 mr-1">
-  <div *ngIf="!registerMode" style="text-align: center">
-    <h3>Register yourself</h3>
-    <div class="text-center">
-      <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Register</button>
+<div class="wall-line">
+  <div *ngFor="let photo of photos" class="card">
+    <img
+      src="{{ photo.url }}"
+      class="card-img-top"
+      alt="{{ photo.description }}"
+    />
+    <div class="card-footer">
+      <small class="text-muted">{{ photo.dateAdded | timeago }}</small>
     </div>
   </div>
 </div>
-
-
-  <div *ngIf="registerMode" class="container-register">
-    <div class="row justify-content-center">
-      <div class="col-4 pr-0">
-      <app-register (cancelRegister)="cancelRegisterMode($event)" ></app-register> 
-      </div>
-    </div>
-  </div>
-
-
-
-<div class="container">
-    <ngx-gallery
-      [options]="galleryOptions"
-      [images]="galleryImages"
-      class="ngx-gallery"
-    ></ngx-gallery>
-</div>
-
- 
- 
 

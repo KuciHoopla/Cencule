@@ -3,8 +3,14 @@
   cursor: pointer;
 }
 
-img{
+img {
   max-height: 50px;
   border: 2px solid white;
   display: inline;
+}
+
+.register-block {
+  position: absolute;
+  top: 100px;
+  right: 20px;
 }
