@@ -7,5 +7,7 @@ export interface PhotoWall {
     publicId: number;
     user: string;
     userId: string;
+    mainUrl: string;
+    userName: string;
 }
 

@@ -60,12 +60,12 @@
                 rows="6"
                 [(ngModel)]="user.introduction"
               ></textarea>
-              <h4>Looking for</h4>
+              <h4>Notes</h4>
               <textarea
                 class="form-control"
-                name="lookingFor"
+                name="notes"
                 rows="6"
-                [(ngModel)]="user.lookingFor"
+                [(ngModel)]="user.notes"
               ></textarea>
               <h4>Interests</h4>
               <textarea
@@ -93,7 +93,7 @@
               </div>
             </form>
           </tab>
-          <tab heading="Edit photos">
+          <tab class="edit-photos" heading="Edit photos">
             <app-photo-editor
               [photos]="user.photos"
               (getMemberPhotoChange)="updateMainPhoto($event)"

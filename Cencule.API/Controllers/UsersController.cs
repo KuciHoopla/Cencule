@@ -28,7 +28,7 @@ namespace Cencule.API.Controllers
 
         }
         [HttpGet]
-        public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams)
+        public async Task<IActionResult> GetUsers([FromQuery] UserParams userParams)
         {
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
@@ -47,7 +47,7 @@ namespace Cencule.API.Controllers
 
             return Ok(usersToReturn);
         }
-        [HttpGet("{id}", Name= "GetUser")]
+        [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
             var user = await _repo.GetUser(id);
@@ -67,11 +67,11 @@ namespace Cencule.API.Controllers
 
             if (await _repo.SaveAll())
                 return NoContent();
-            
+
             throw new Exception($"Updating user {id} failed on save");
         }
 
-         [HttpPost("{id}/like/{recipientId}")]
+        [HttpPost("{id}/like/{recipientId}")]
         public async Task<IActionResult> LikeUser(int id, int recipientId)
         {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -82,10 +82,10 @@ namespace Cencule.API.Controllers
 
             if (like != null)
                 return BadRequest("You already like this user");
-            
+
             if (await _repo.GetUser(recipientId) == null)
                 return NotFound();
-            
+
             like = new Like
             {
                 LikerId = id,
@@ -100,5 +100,5 @@ namespace Cencule.API.Controllers
             return BadRequest("Failed to like user");
         }
 
-        }
     }
+}

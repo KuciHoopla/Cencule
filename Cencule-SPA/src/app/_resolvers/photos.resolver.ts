@@ -11,10 +11,9 @@ import { PhotoWall } from '../_models/photoWall';
   providedIn: 'root'
 })
 export class PhotosResolver implements Resolve<PhotoWall[]> {
-  
   constructor(private photoService: PhotoService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): 
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
   Observable<PhotoWall[]> | Promise<PhotoWall[]> | PhotoWall[] {
     return this.photoService.getPhotos();
   }

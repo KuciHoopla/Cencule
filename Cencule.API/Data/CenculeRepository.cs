@@ -28,7 +28,7 @@ namespace Cencule.API.Data
 
         public async Task<Like> GetLike(int userId, int recipientId)
         {
-            return await _context.Likes.FirstOrDefaultAsync(u => 
+            return await _context.Likes.FirstOrDefaultAsync(u =>
                 u.LikerId == userId && u.LikeeId == recipientId);
         }
 
@@ -43,12 +43,11 @@ namespace Cencule.API.Data
             return photo;
         }
 
-        public async Task<IEnumerable<Photo>> GetPhotos()
+        public async Task<List<Photo>> GetPhotos()
         {
-            var photos = _context.Photos.OrderByDescending(p => p.DateAdded)
+            var wallPhotos = _context.Photos.OrderByDescending(p => p.DateAdded)
                 .ToListAsync();
-            
-            return await photos;
+            return await wallPhotos;
         }
 
         public async Task<User> GetUser(int id)
@@ -58,9 +57,11 @@ namespace Cencule.API.Data
             return user;
         }
 
+
+
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users =  _context.Users.Include(p => p.Photos)
+            var users = _context.Users.Include(p => p.Photos)
             .OrderByDescending(u => u.LastActive).AsQueryable();
 
             users = users.Where(u => u.Id != userParams.UserId);
@@ -71,15 +72,15 @@ namespace Cencule.API.Data
                 var userLikers = await GetUserLikes(userParams.UserId, userParams.Likers);
                 users = users.Where(u => userLikers.Contains(u.Id));
             }
-             if (userParams.Likees)
+            if (userParams.Likees)
             {
                 var userLikees = await GetUserLikes(userParams.UserId, userParams.Likers);
                 users = users.Where(u => userLikees.Contains(u.Id));
             }
 
-            if (userParams.MinAge != 18 || userParams.MaxAge !=99)
+            if (userParams.MinAge != 18 || userParams.MaxAge != 99)
             {
-                var minDob = DateTime.Today.AddYears(-userParams.MaxAge -1);
+                var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
                 var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
 
                 users = users.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
@@ -87,7 +88,7 @@ namespace Cencule.API.Data
 
             if (!string.IsNullOrEmpty(userParams.OrderBy))
             {
-                switch(userParams.OrderBy)
+                switch (userParams.OrderBy)
                 {
                     case "created":
                         users = users.OrderByDescending(u => u.Created);
@@ -107,15 +108,15 @@ namespace Cencule.API.Data
                 .Include(x => x.Likers)
                 .Include(x => x.Likees)
                 .FirstOrDefaultAsync(u => u.Id == id);
-        
-        if (likers)
-        {
-            return user.Likers.Where(u => u.LikeeId == id).Select(i => i.LikerId);
-        }
-        else 
-        {
-            return user.Likees.Where(u => u.LikerId == id).Select(i => i.LikeeId);
-        }
+
+            if (likers)
+            {
+                return user.Likers.Where(u => u.LikeeId == id).Select(i => i.LikerId);
+            }
+            else
+            {
+                return user.Likees.Where(u => u.LikerId == id).Select(i => i.LikeeId);
+            }
 
         }
         public async Task<bool> SaveAll()
@@ -134,19 +135,19 @@ namespace Cencule.API.Data
                 .Include(u => u.Sender).ThenInclude(p => p.Photos)
                 .Include(u => u.Recipient).ThenInclude(p => p.Photos)
                 .AsQueryable();
-            
+
             switch (messageParams.MessageContainer)
             {
                 case "Inbox":
-                    messages = messages.Where(u => u.RecipientId == messageParams.UserId 
+                    messages = messages.Where(u => u.RecipientId == messageParams.UserId
                     && u.RecipientDeleted == false);
                     break;
                 case "Outbox":
-                    messages = messages.Where(u => u.SenderId == messageParams.UserId 
+                    messages = messages.Where(u => u.SenderId == messageParams.UserId
                     && u.SenderDeleted == false);
                     break;
                 default:
-                    messages = messages.Where(u => u.RecipientId == messageParams.UserId && u.RecipientDeleted == false 
+                    messages = messages.Where(u => u.RecipientId == messageParams.UserId && u.RecipientDeleted == false
                     && u.IsRead == false);
                     break;
             }
@@ -161,7 +162,7 @@ namespace Cencule.API.Data
             var messages = await _context.Messages
                 .Include(u => u.Sender).ThenInclude(p => p.Photos)
                 .Include(u => u.Recipient).ThenInclude(p => p.Photos)
-                .Where(m => m.RecipientId == userId && m.RecipientDeleted == false && m.SenderId == recipientId 
+                .Where(m => m.RecipientId == userId && m.RecipientDeleted == false && m.SenderId == recipientId
                     || m.RecipientId == recipientId && m.SenderId == userId && m.SenderDeleted == false)
                 .OrderByDescending(m => m.MessageSent)
                 .ToListAsync();

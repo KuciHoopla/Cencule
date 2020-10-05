@@ -1,14 +1,8 @@
-<div class="container">
-  <div *ngIf="!registerMode" style="text-align: center">
-    <div class="text-center">
-      <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">
-        Register
-      </button>
-    </div>
-  </div>
-</div>
+<button *ngIf="!registerMode" class="btn-info ml-2" (click)="registerToggle()">
+  Register
+</button>
 
-<div *ngIf="registerMode" class="container bg-light">
+<div *ngIf="registerMode" class="container bg-light position-absolute">
   <div class="row justify-content-center">
     <div class="col-12 pr-0">
       <app-register

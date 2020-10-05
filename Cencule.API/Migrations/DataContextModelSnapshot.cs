@@ -94,6 +94,12 @@ namespace Cencule.API.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("MainUrl")
+                        .HasColumnType("Text");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("Text");
+
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
@@ -134,7 +140,7 @@ namespace Cencule.API.Migrations
                     b.Property<DateTime>("LastActive")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("LookingFor")
+                    b.Property<string>("Notes")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("PasswordHash")

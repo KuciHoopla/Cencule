@@ -19,28 +19,28 @@ namespace Cencule.API.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Like>()
-                .HasKey(k => new {k.LikerId, k.LikeeId});
-            
+                .HasKey(k => new { k.LikerId, k.LikeeId });
+
             builder.Entity<Like>()
                 .HasOne(u => u.Likee)
-                .WithMany( u => u.Likers)
+                .WithMany(u => u.Likers)
                 .HasForeignKey(u => u.LikeeId)
                 .OnDelete(DeleteBehavior.Restrict);
-            
+
             builder.Entity<Like>()
                 .HasOne(u => u.Liker)
-                .WithMany( u => u.Likees)
+                .WithMany(u => u.Likees)
                 .HasForeignKey(u => u.LikerId)
                 .OnDelete(DeleteBehavior.Restrict);
-            
+
             builder.Entity<Message>()
                 .HasOne(m => m.Sender)
-                .WithMany( m => m.MessagesSent)
+                .WithMany(m => m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
-            
+
             builder.Entity<Message>()
                 .HasOne(m => m.Recipient)
-                .WithMany( m => m.MessagesReceived)
+                .WithMany(m => m.MessagesReceived)
                 .OnDelete(DeleteBehavior.Restrict);
         }
 

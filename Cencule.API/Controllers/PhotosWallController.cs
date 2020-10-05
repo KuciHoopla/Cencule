@@ -1,16 +1,12 @@
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
 using Cencule.API.Data;
-using Cencule.API.Dtos;
 using Cencule.API.Helpers;
-using Cencule.API.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Cencule.API.Dtos;
+using System.Collections;
 
 namespace Cencule.API.Controllers
 {
@@ -31,6 +27,7 @@ namespace Cencule.API.Controllers
             _mapper = mapper;
             _repo = repo;
 
+
             Account acc = new Account(
                 _cloudinaryConfig.Value.CloudName,
                 _cloudinaryConfig.Value.ApiKey,
@@ -44,8 +41,22 @@ namespace Cencule.API.Controllers
         public async Task<IActionResult> GetPhotos()
         {
             var photos = await _repo.GetPhotos();
-          
-            return Ok(photos);
+            var photosForWall = new ArrayList();
+
+            foreach (var photo in photos)
+            {
+                var photoWall = _mapper.Map<PhotoForWallDTO>(photo);
+                var user = await _repo.GetUser(photoWall.UserId);
+                var userToReturn = _mapper.Map<UserForListDTO>(user);
+                photoWall.UserName = userToReturn.KnownAs;
+                photoWall.MainUrl = userToReturn.PhotoUrl;
+                photosForWall.Add(photoWall);
+
+            };
+
+
+
+            return Ok(photosForWall);
         }
 
     }
