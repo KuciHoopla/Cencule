@@ -6,7 +6,6 @@ import { PhotoWall } from '../_models/photoWall';
 import { User } from '../_models/user';
 import { UserService } from '../_services/user.service';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,13 +19,13 @@ export class HomeComponent implements OnInit {
   photos: PhotoWall[];
   users: User[];
 
-ngOnInit() {
+  ngOnInit() {
     this.route.data.subscribe((data: { photoWall: PhotoWall[] }) => {
       this.photos = data.photoWall;
     });
   }
 
-toggleClass(i) {
+  toggleClass(i) {
     const cardId = 'card' + i;
     const imgId = 'img' + i;
     const elementClass = document.getElementById(imgId).classList;
@@ -40,4 +39,6 @@ toggleClass(i) {
       document.getElementById('wrapper').style.overflow = 'auto';
     }
   }
+
 }
+

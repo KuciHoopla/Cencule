@@ -1,0 +1,8 @@
+.weather-icon {
+  width: 25px;
+}
+
+.celsius {
+  font-size: small;
+  color: aliceblue;
+}

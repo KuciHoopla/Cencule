@@ -18,3 +18,7 @@
     height: 70vh;
     overflow: auto;
 }
+
+.container{
+    margin-bottom: 50px !important;
+}

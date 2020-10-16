@@ -16,9 +16,9 @@ import { PhotosResolver } from './_resolvers/photos.resolver';
 
 
 export const appRoutes: Routes = [
-  { path: '', 
+  { path: '',
   component: HomeComponent,
-  resolve: { photoWall: PhotosResolver }, 
+  resolve: { photoWall: PhotosResolver },
   },
   {
     /* all children components will be protected to type in url directly by urlroute,
@@ -47,10 +47,7 @@ export const appRoutes: Routes = [
       },
       { path: 'lists', component: ListsComponent, resolve: {users: ListsResolver} },
       { path: 'messages', component: MessagesComponent, resolve: {messages: MessagesResolver} },
-    
       ],
-    
-      
   },
 
   { path: '**', redirectTo: '', pathMatch: 'full' },

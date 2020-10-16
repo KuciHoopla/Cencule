@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Cencule.API.Dtos;
 using System.Collections;
+using Microsoft.AspNetCore.Cors;
 
 namespace Cencule.API.Controllers
 {
-
     [Route("/api/photos")]
     [ApiController]
+
+    
     public class PhotosWallController : ControllerBase
     {
         private readonly ICenculeRepository _repo;
@@ -35,8 +37,7 @@ namespace Cencule.API.Controllers
             _cloudinary = new Cloudinary(acc);
 
         }
-
-
+        
         [HttpGet]
         public async Task<IActionResult> GetPhotos()
         {
@@ -53,9 +54,7 @@ namespace Cencule.API.Controllers
                 photosForWall.Add(photoWall);
 
             };
-
-
-
+            
             return Ok(photosForWall);
         }
 
