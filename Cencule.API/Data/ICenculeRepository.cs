@@ -14,6 +14,7 @@ namespace Cencule.API.Data
         Task<User> GetUser(int id);
         Task<Photo> GetPhoto(int id);
         Task<List<Photo>> GetPhotos();
+        Task<List<Blog>> GetBlogs();
         Task<Photo> GetMainPhotoFromUser(int userId);
         Task<Like> GetLike(int userId, int recipientId);
         Task<Message> GetMessage(int id);

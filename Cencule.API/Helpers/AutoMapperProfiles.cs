@@ -21,6 +21,7 @@ namespace Cencule.API.Helpers
                 opt.MapFrom(src => src.DateOfBirth.CalculatingAge()));
             CreateMap<Photo, PhotosForDetailedDTO>();
             CreateMap<Photo, PhotoForWallDTO>();
+            CreateMap<Blog, BlogForWallDTO>();
             CreateMap<UserForUpdateDto, User>();
             CreateMap<Photo, PhotoForReturnDto>();
             CreateMap<PhotoForCreationDto, Photo>();

@@ -50,6 +50,13 @@ namespace Cencule.API.Data
             return await wallPhotos;
         }
 
+        public async Task<List<Blog>> GetBlogs()
+        {
+            var wallBlogs = _context.Blogs.OrderByDescending(b => b.DateAdded)
+                .ToListAsync();
+            return await wallBlogs;
+        }
+
         public async Task<User> GetUser(int id)
         {
             var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);

@@ -1,0 +1,23 @@
+<div id="wrapper" class="wall-line">
+  <div
+    id="card{{ i }}"
+    *ngFor="let photo of photos; let last = last; let i = index"
+    [ngClass]="{ 'last-child': last }"
+    class="card box mb-2"
+  >
+    <div class="d-flex justify-content-start align-items-center">
+      <img class="ml-3 userMainPhoto" src="{{ photo.mainUrl }}" alt="" />
+      <h5 class="m-2">{{ photo.userName }}</h5>
+      <small class="ml-2" class="text-muted float-right">{{
+        photo.dateAdded | timeago
+      }}</small>
+    </div>
+    <img
+      src="{{ photo.url }}"
+      id="img{{ i }}"
+      class="card-img-top modal-body"
+      (click)="toggleClass(i)"
+      alt="{{ photo.description }}"
+    />
+  </div>
+</div>

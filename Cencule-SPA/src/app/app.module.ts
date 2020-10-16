@@ -44,6 +44,8 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
 import { FooterComponent } from './footer/footer.component';
 import { RegisterBlockComponent } from './register-block/register-block.component';
 import { WeatherComponent } from './weather/weather.component';
+import { WallComponent } from './wall/wall.component';
+import { BlogComponent } from './blog/blog.component';
 
 
 export function tokenGetter() {
@@ -51,7 +53,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     NavComponent,
     HomeComponent,
@@ -66,7 +68,9 @@ export function tokenGetter() {
     MemberMessagesComponent,
     FooterComponent,
     RegisterBlockComponent,
-    WeatherComponent
+    WeatherComponent,
+    WallComponent,
+    BlogComponent
    ],
   imports: [
     BrowserModule,
