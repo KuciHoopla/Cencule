@@ -35,7 +35,7 @@ namespace Cencule.API.Controllers
                 _cloudinaryConfig.Value.CloudName,
                 _cloudinaryConfig.Value.ApiKey,
                 _cloudinaryConfig.Value.ApiSecret);
-                _cloudinary = new Cloudinary(acc);
+            _cloudinary = new Cloudinary(acc);
 
         }
         [HttpGet("{id}", Name = "GetPhoto")]

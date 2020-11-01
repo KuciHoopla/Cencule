@@ -43,6 +43,12 @@ namespace Cencule.API.Data
             return photo;
         }
 
+        public async Task<Blog> GetBlog(int id)
+        {
+            var blog = await _context.Blogs.FirstOrDefaultAsync(b => b.Id == id);
+            return blog;
+        }
+
         public async Task<List<Photo>> GetPhotos()
         {
             var wallPhotos = _context.Photos.OrderByDescending(p => p.DateAdded)

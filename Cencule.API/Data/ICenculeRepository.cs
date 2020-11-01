@@ -13,6 +13,7 @@ namespace Cencule.API.Data
         Task<PagedList<User>> GetUsers(UserParams userParams);
         Task<User> GetUser(int id);
         Task<Photo> GetPhoto(int id);
+        Task<Blog> GetBlog(int id);
         Task<List<Photo>> GetPhotos();
         Task<List<Blog>> GetBlogs();
         Task<Photo> GetMainPhotoFromUser(int userId);

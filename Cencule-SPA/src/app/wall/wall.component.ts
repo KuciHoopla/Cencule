@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ElementFinder } from 'protractor';
-import { last } from 'rxjs/operators';
 import { PhotoWall } from '../_models/photoWall';
 import { User } from '../_models/user';
-import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-wall',
@@ -13,7 +10,6 @@ import { UserService } from '../_services/user.service';
 })
 export class WallComponent implements OnInit {
   constructor(
-    private userService: UserService,
     private route: ActivatedRoute
   ) {}
   photos: PhotoWall[];

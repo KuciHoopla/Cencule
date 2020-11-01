@@ -1,7 +1,7 @@
 .wall-line {
-  width: 400px;
+  width: 100%;
   margin: 70px auto 30px;
-  height: 100vh;
+  height: 90vh;
   overflow: auto;
 }
 
@@ -28,10 +28,9 @@
   box-shadow: 0px 0px 10px 50cm black;
   border: 5px solid white;
   padding: 0;
-  
 }
 
-.userMainPhoto{
+.userMainPhoto {
   height: 50px;
   width: auto;
   border-radius: 50%;

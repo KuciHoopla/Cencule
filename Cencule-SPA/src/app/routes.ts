@@ -13,12 +13,14 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { PhotosResolver } from './_resolvers/photos.resolver';
-
+import { BlogsResolver } from './_resolvers/blogs.resolver';
 
 export const appRoutes: Routes = [
-  { path: '',
-  component: HomeComponent,
-  resolve: { photoWall: PhotosResolver },
+  {
+    path: '',
+    component: HomeComponent,
+    resolve: { photoWall: PhotosResolver, blog: BlogsResolver },
+    runGuardsAndResolvers: 'always',
   },
   {
     /* all children components will be protected to type in url directly by urlroute,
@@ -34,6 +36,7 @@ export const appRoutes: Routes = [
         component: MemberListComponent,
         resolve: { users: MemberListResolver },
       },
+
       {
         path: 'members/:id',
         component: MemberDetailComponent,
@@ -43,12 +46,21 @@ export const appRoutes: Routes = [
         path: 'member/edit',
         component: MemberEditComponent,
         resolve: { user: MemberEditResolver },
-        canDeactivate: [PreventUnsavedChanges]
+        canDeactivate: [PreventUnsavedChanges],
       },
-      { path: 'lists', component: ListsComponent, resolve: {users: ListsResolver} },
-      { path: 'messages', component: MessagesComponent, resolve: {messages: MessagesResolver} },
-      ],
+      {
+        path: 'lists',
+        component: ListsComponent,
+        resolve: { users: ListsResolver },
+      },
+      {
+        path: 'messages',
+        component: MessagesComponent,
+        resolve: { messages: MessagesResolver },
+      },
+    ],
   },
-
+  
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
+

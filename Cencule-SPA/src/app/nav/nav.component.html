@@ -1,11 +1,9 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
   <div class="container">
-    
-    <a class="navbar-brand" [routerLink]="['/home']">Cencule</a>
+    <a class="navbar-brand" [routerLink]="['/']">Cencule</a>
+    <app-blog-add class="add-blog" *ngIf="loggedIn()"></app-blog-add>
     <app-weather></app-weather>
     <app-register-block *ngIf="!loggedIn()"></app-register-block>
-      
-    
 
     <!-- <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
@@ -24,7 +22,7 @@
         <img src="{{ photoUrl || '../../assets/user.png' }}" alt="" />
       </span>
       <a class="dropdown-toggle text-light" dropdownToggle>
-         {{ authService.decodedToken?.unique_name | titlecase }}
+        {{ authService.decodedToken?.unique_name | titlecase }}
       </a>
 
       <div class="dropdown-menu mt-3" *dropdownMenu>

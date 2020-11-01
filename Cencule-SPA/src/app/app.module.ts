@@ -1,4 +1,8 @@
-import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  HammerGestureConfig,
+  HAMMER_GESTURE_CONFIG,
+} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -13,7 +17,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimeagoModule } from 'ngx-timeago';
-import { PaginationModule} from 'ngx-bootstrap/pagination';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
@@ -46,7 +50,10 @@ import { RegisterBlockComponent } from './register-block/register-block.componen
 import { WeatherComponent } from './weather/weather.component';
 import { WallComponent } from './wall/wall.component';
 import { BlogComponent } from './blog/blog.component';
-
+import { PhotosResolver } from './_resolvers/photos.resolver';
+import { BlogsResolver } from './_resolvers/blogs.resolver';
+import { BlogAddComponent } from './blogAdd/blogAdd.component';
+import { BlogAddService } from './_services/blogAdd.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -70,8 +77,10 @@ export function tokenGetter() {
     RegisterBlockComponent,
     WeatherComponent,
     WallComponent,
-    BlogComponent
-   ],
+    BlogComponent,
+    BlogAddComponent,
+  ],
+
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -108,7 +117,10 @@ export function tokenGetter() {
     MemberEditResolver,
     PreventUnsavedChanges,
     ListsResolver,
-    MessagesResolver
+    MessagesResolver,
+    PhotosResolver,
+    BlogsResolver,
+    BlogAddService,
   ],
 
   bootstrap: [AppComponent],

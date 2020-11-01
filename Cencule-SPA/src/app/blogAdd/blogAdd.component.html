@@ -1,0 +1,52 @@
+<button id="add-blog-btn" class="btn btn-success" (click)="showUp()">
+  Share your story
+</button>
+
+<form id="add-blog-block" [formGroup]="blogAddForm" (ngSubmit)="blogAdd()">
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          blogAddForm.get('description').errors &&
+          blogAddForm.get('description').touched
+      }"
+      type="text"
+      class="form-control is-invalid"
+      formControlName="description"
+      placeholder="your story"
+    />
+    <input type="file" ng2FileSelect [uploader]="uploader"/>
+    <div class="invalid-feedback">please add your story</div>
+  </div>
+
+  <div>
+    Queue progress:
+    <div class="progress mb-4">
+      <div
+        class="progress-bar"
+        role="progressbar"
+        [ngStyle]="{ width: uploader.progress + '%' }"
+      ></div>
+    </div>
+  </div>
+
+  <div class="form-group text-center">
+    <button
+      class="btn btn-success"
+      type="submit"
+      [disabled]="!blogAddForm.valid"
+      (click)="uploader.uploadAll()"
+      [disabled]="!uploader.getNotUploadedItems().length"
+    >
+      OK
+    </button>
+    <button
+      class="btn btn-danger ml-1"
+      type="button"
+      (click)="cancel()"
+      (click)="uploader.cancelAll()"
+    >
+      Cancel
+    </button>
+  </div>
+</form>

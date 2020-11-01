@@ -22,6 +22,9 @@ namespace Cencule.API.Helpers
             CreateMap<Photo, PhotosForDetailedDTO>();
             CreateMap<Photo, PhotoForWallDTO>();
             CreateMap<Blog, BlogForWallDTO>();
+            CreateMap<Blog, BlogForReturnDto>();
+            CreateMap<BlogForUpdateDto, Blog>();
+            CreateMap<BlogForCreationDTO, Blog>();
             CreateMap<UserForUpdateDto, User>();
             CreateMap<Photo, PhotoForReturnDto>();
             CreateMap<PhotoForCreationDto, Photo>();
