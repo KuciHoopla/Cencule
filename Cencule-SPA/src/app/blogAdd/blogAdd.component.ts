@@ -71,6 +71,7 @@ export class BlogAddComponent implements OnInit {
     this.cancelblogAdd.emit(false);
     // document.getElementById('add-blog-block').style.display = 'none';
     document.getElementById('add-blog-btn').style.display = 'block';
+    document.getElementById('add-blog-block').style.display = 'none';
     this.alertify.warning('canceled');
   }
 

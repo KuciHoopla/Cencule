@@ -1,12 +1,12 @@
-<div class="container mt-4" >
+<div class="container mt-4">
   <div class="row d-flex justify-content-around">
     <div class="cal-sm-4">
-      <h1>Your profile</h1>
+      <h1>Tvoj profil</h1>
     </div>
     <div class="col-sm8">
       <div *ngIf="editForm.dirty" class="alert alert-info">
         <p class="font-weight-bold text-uppercase">
-          Information: You have made changes. Any unsaved changes will be lost!
+          Info: Urobil si zmenz ale keď nepotvrdíš tak sa zmažu.
         </p>
       </div>
     </div>
@@ -21,19 +21,19 @@
         />
         <div class="card-body">
           <div>
-            <strong>Location:</strong>
+            <strong>Adresa:</strong>
             <p>{{ user.city }}, {{ user?.country }}</p>
           </div>
           <div>
-            <strong>Age:</strong>
+            <strong>Vek:</strong>
             <p>{{ user.age }}</p>
           </div>
           <div>
-            <strong>Last active:</strong>
+            <strong>Aktívny naposledy:</strong>
             <p>{{ user.lastActive | timeago }}</p>
           </div>
           <div>
-            <strong>Member since:</strong>
+            <strong>Členom od:</strong>
             <p>{{ user.created | date }}</p>
           </div>
           <div class="card-footer">
@@ -42,7 +42,7 @@
               [disabled]="!editForm.dirty"
               class="btn btn-success btn-block w-100"
             >
-              Save changes
+              Ulož
             </button>
           </div>
         </div>
@@ -51,39 +51,39 @@
     <div class="col-sm-8">
       <div class="tab-panel">
         <tabset class="member-tabset">
-          <tab heading="Edit profile of {{ user?.knownAs }}">
+          <tab heading="Upraviť profil">
             <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
-              <h4>Description</h4>
+              <h4>Popis</h4>
               <textarea
                 class="form-control"
                 name="introduction"
                 rows="6"
                 [(ngModel)]="user.introduction"
               ></textarea>
-              <h4>Notes</h4>
+              <h4>Poznámky</h4>
               <textarea
                 class="form-control"
                 name="notes"
                 rows="6"
                 [(ngModel)]="user.notes"
               ></textarea>
-              <h4>Interests</h4>
+              <h4>Záujmy</h4>
               <textarea
                 class="form-control"
                 name="interests"
                 rows="6"
                 [(ngModel)]="user.interests"
               ></textarea>
-              <h4>Location details:</h4>
+              <h4>Adresa:</h4>
               <div class="form-inline">
-                <label for="city">City</label>
+                <label for="city">Mesto</label>
                 <input
                   type="text"
                   class="form-control"
                   name="city"
                   [(ngModel)]="user.city"
                 />
-                <label for="country">Country</label>
+                <label for="country">Krajina</label>
                 <input
                   type="text"
                   class="form-control"
@@ -93,7 +93,7 @@
               </div>
             </form>
           </tab>
-          <tab class="edit-photos" heading="Edit photos">
+          <tab class="edit-photos" heading="Upraviť fotky">
             <app-photo-editor
               [photos]="user.photos"
               (getMemberPhotoChange)="updateMainPhoto($event)"

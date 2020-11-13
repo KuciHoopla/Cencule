@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
     <div *ngIf="messages?.length === 0">
-      <p>no messages yet... say hi by using the message box below</p>
+      <p>žiadne správy... napíš niečo dole do riadku</p>
     </div>
 
     <ul class="chat">
@@ -48,10 +48,10 @@
                   message.messageSent | timeago
                 }}</span>
                 <span *ngIf="!message.isRead" class="text-danger"
-                  >(unread)</span
+                  >(neprečítané)</span
                 >
                 <span *ngIf="message.isRead" class="text-success"
-                  >(read {{ message.dateRead | timeago }})</span
+                  >(prečítané {{ message.dateRead | timeago }})</span
                 >
               </small>
               <strong class="primary-font float-right">
@@ -73,11 +73,11 @@
           name="content"
           required
           class="form-control input-sm"
-          placeholder="send a private message"
+          placeholder="pošli súkromnú správu"
         />
         <div class="input-group-append">
           <button class="btn btn-primary" [disabled]="!messageForm.valid">
-            Send
+            Odošli
           </button>
         </div>
       </div>

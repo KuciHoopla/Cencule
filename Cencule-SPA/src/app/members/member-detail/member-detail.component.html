@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container">
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
@@ -9,26 +9,26 @@
         />
         <div class="card-body">
           <div>
-            <strong>Location:</strong>
+            <strong>Adresa:</strong>
             <p>{{ user.city }}, {{ user?.country }}</p>
           </div>
           <div>
-            <strong>Age:</strong>
+            <strong>Vek:</strong>
             <p>{{ user.age }}</p>
           </div>
           <div>
-            <strong>Last active:</strong>
+            <strong>Kedy bol člen aktívny:</strong>
             <p>{{ user.lastActive | timeago }}</p>
           </div>
           <div>
-            <strong>Member since:</strong>
+            <strong>Registrovaný už:</strong>
             <p>{{ user.created | date: "mediumDate" }}</p>
           </div>
           <div class="card-footer">
             <div class="btn-group d-flex">
               <button class="btn btn-primary w-100">Like</button>
               <button class="btn btn-success w-100" (click)="selectTab(3)">
-                Message
+                Správa
               </button>
             </div>
           </div>
@@ -38,24 +38,24 @@
     <div class="col-sm-8">
       <div class="tab-panel">
         <tabset class="member-tabset" #memberTabs>
-          <tab heading="About {{ user?.knownAs }}">
-            <h4>Description</h4>
+          <tab heading="Info {{ user?.knownAs }}">
+            <h4>Popis</h4>
             <p>{{ user.introduction }}</p>
-            <h4>Notes</h4>
+            <h4>Poznámky</h4>
             <p>{{ user.notes }}</p>
           </tab>
-          <tab heading="Interests">
-            <h4>Interests</h4>
+          <tab heading="Záujmy">
+            <h4>Záujmy</h4>
             <p>{{ user.interests }}</p>
           </tab>
-          <tab heading="Photos">
+          <tab heading="Fotky">
             <ngx-gallery
               [options]="galleryOptions"
               [images]="galleryImages"
               class="ngx-gallery"
             ></ngx-gallery>
           </tab>
-          <tab heading="Messages">
+          <tab heading="Správy">
             <app-member-messages [recipientId]="user.id"> </app-member-messages>
           </tab>
         </tabset>

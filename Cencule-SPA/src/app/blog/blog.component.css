@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  margin: 70px 20px;
+  margin: 0 0 50px 0;
   height: 90vh;
   overflow: auto;
 }

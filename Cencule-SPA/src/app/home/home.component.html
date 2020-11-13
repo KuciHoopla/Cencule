@@ -1,5 +1,7 @@
 <div class="wrapper">
   <div class="container blog">
+    <app-blog-add class="add-blog" *ngIf="loggedIn()"></app-blog-add>
+
     <app-blog></app-blog>
   </div>
 

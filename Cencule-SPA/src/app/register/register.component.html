@@ -2,19 +2,28 @@
   <h2 class="text-center text-primary">Sign Up</h2>
   <hr />
 
-    <!-- =====
+  <!-- =====
  radiobutton
   ===== -->
   <div class="form-group">
-    <label class="control-label">I am a: </label>
+    <label class="control-label">Pohlavie: </label>
     <label class="radio-inline ml-3">
-      <input class="mr-1 ml-3" type="radio" value="male" formControlName="gender">Male
+      <input
+        class="mr-1 ml-3"
+        type="radio"
+        value="male"
+        formControlName="gender"
+      />Muž
     </label>
     <label class="radio-inline ml-5">
-      <input class="mr-1" type="radio" value="female" formControlName="gender">Female
+      <input
+        class="mr-1"
+        type="radio"
+        value="female"
+        formControlName="gender"
+      />Žena
     </label>
   </div>
-
 
   <!-- =====
   user
@@ -29,24 +38,24 @@
       type="text"
       class="form-control is-invalid"
       formControlName="username"
-      placeholder="username"
+      placeholder="Meno"
     />
-    <div class="invalid-feedback">Please choose a user name</div>
+    <div class="invalid-feedback">Vyber si meno</div>
   </div>
   <!-- =====
   password
   ===== -->
   <div class="form-group">
-    <input  type="password"
+    <input
+      type="password"
       [ngClass]="{
         'is-invalid':
           registerForm.get('password').errors &&
           registerForm.get('password').touched
       }"
-     
       class="form-control is-invalid"
       formControlName="password"
-      placeholder="Password"
+      placeholder="Heslo"
     />
     <div
       class="invalid-feedback"
@@ -55,7 +64,7 @@
         registerForm.get('password').touched
       "
     >
-      Password is required
+      Heslo musí byť vyplnené
     </div>
     <div
       class="invalid-feedback"
@@ -64,7 +73,7 @@
         registerForm.get('password').touched
       "
     >
-      Password has to be at least 4 characters
+      Heslo musí mať aspoň 4 písmená
     </div>
     <div
       class="invalid-feedback"
@@ -73,27 +82,26 @@
         registerForm.get('password').touched
       "
     >
-      Password can not exceed 8 characters
+      Heslo nesmie presiahnuť 8 písmen
     </div>
   </div>
 
-<!-- =====
+  <!-- =====
 confirm password
 ===== -->
   <div class="form-group">
     <input
       [ngClass]="{
         'is-invalid':
-          registerForm.get('confirmPassword').errors &&
-          registerForm.get('confirmPassword').touched 
-          ||
-          registerForm.get('confirmPassword').touched &&
-          registerForm.hasError('mismatch')
+          (registerForm.get('confirmPassword').errors &&
+            registerForm.get('confirmPassword').touched) ||
+          (registerForm.get('confirmPassword').touched &&
+            registerForm.hasError('mismatch'))
       }"
       type="password"
       class="form-control is-invalid"
       formControlName="confirmPassword"
-      placeholder="Confirm Password"
+      placeholder="Zopakuj heslo"
     />
     <div
       class="invalid-feedback"
@@ -111,57 +119,122 @@ confirm password
         registerForm.get('confirmPassword').touched
       "
     >
-      Passwords must match
+      Heslo musí byť rovnaké
     </div>
-    
   </div>
 
- 
-
-
-
-<!-- =====
+  <!-- =====
 known as
 ===== -->
 
   <div class="form-group">
-    <input [ngClass]="{'is-invalid': registerForm.get('knownAs').errors && registerForm.get('knownAs').touched}" class="form-control"
-      placeholder="Known as" formControlName="knownAs">
-    <div class="invalid-feedback" *ngIf="registerForm.get('knownAs').touched && registerForm.get('knownAs').hasError('required')">Known as is required</div>
+    <input
+      [ngClass]="{
+        'is-invalid':
+          registerForm.get('knownAs').errors &&
+          registerForm.get('knownAs').touched
+      }"
+      class="form-control"
+      placeholder="Prezývka"
+      formControlName="knownAs"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        registerForm.get('knownAs').touched &&
+        registerForm.get('knownAs').hasError('required')
+      "
+    >
+      Prezývka je povinná
+    </div>
   </div>
 
-<!-- =====
+  <!-- =====
 date of birth
 ===== -->
 
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          registerForm.get('dateOfBirth').errors &&
+          registerForm.get('dateOfBirth').touched
+      }"
+      class="form-control"
+      placeholder="Dátum narodenia"
+      formControlName="dateOfBirth"
+      type="text"
+      bsDatepicker
+      [bsConfig]="bsConfig"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        registerForm.get('dateOfBirth').touched &&
+        registerForm.get('dateOfBirth').hasError('required')
+      "
+    >
+      Dátum narodenia je povinný
+    </div>
+  </div>
 
-    <div class="form-group">
-        <input [ngClass]="{'is-invalid': registerForm.get('dateOfBirth').errors && registerForm.get('dateOfBirth').touched}" class="form-control"
-          placeholder="Date of Birth" formControlName="dateOfBirth" type="text" bsDatepicker [bsConfig]='bsConfig'>
-        <div class="invalid-feedback" *ngIf="registerForm.get('dateOfBirth').touched && registerForm.get('dateOfBirth').hasError('required')">Date of Birth is required</div>
-      </div>
-
-<!-- =====
+  <!-- =====
 city and country
 ===== -->
 
   <div class="form-group">
-    <input [ngClass]="{'is-invalid': registerForm.get('city').errors && registerForm.get('city').touched}" class="form-control"
-      placeholder="City" formControlName="city">
-    <div class="invalid-feedback" *ngIf="registerForm.get('city').touched && registerForm.get('city').hasError('required')">City is required</div>
+    <input
+      [ngClass]="{
+        'is-invalid':
+          registerForm.get('city').errors && registerForm.get('city').touched
+      }"
+      class="form-control"
+      placeholder="Mesto"
+      formControlName="city"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        registerForm.get('city').touched &&
+        registerForm.get('city').hasError('required')
+      "
+    >
+      Mesto je povinné
+    </div>
   </div>
 
   <div class="form-group">
-    <input [ngClass]="{'is-invalid': registerForm.get('country').errors && registerForm.get('country').touched}" class="form-control"
-      placeholder="Country" formControlName="country">
-    <div class="invalid-feedback" *ngIf="registerForm.get('country').touched && registerForm.get('country').hasError('required')">Country is required</div>
+    <input
+      [ngClass]="{
+        'is-invalid':
+          registerForm.get('country').errors &&
+          registerForm.get('country').touched
+      }"
+      class="form-control"
+      placeholder="Krajina"
+      formControlName="country"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        registerForm.get('country').touched &&
+        registerForm.get('country').hasError('required')
+      "
+    >
+      Krajina je povinná
+    </div>
   </div>
 
   <div class="form-group text-center">
-    <button class="btn btn-success" type="submit" [disabled]='!registerForm.valid'>Register</button>
+    <button
+      class="btn btn-success"
+      type="submit"
+      [disabled]="!registerForm.valid"
+    >
+      Potvrdiť registráciu
+    </button>
     <button class="btn btn-danger ml-1" type="button" (click)="cancel()">
-      Cancel
+      Zrušiť
     </button>
   </div>
 </form>
-

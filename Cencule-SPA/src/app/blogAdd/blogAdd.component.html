@@ -1,5 +1,5 @@
 <button id="add-blog-btn" class="btn btn-success" (click)="showUp()">
-  Share your story
+  Pridaj príbeh
 </button>
 
 <form id="add-blog-block" [formGroup]="blogAddForm" (ngSubmit)="blogAdd()">
@@ -15,13 +15,12 @@
       formControlName="description"
       placeholder="your story"
     />
-    <input type="file" ng2FileSelect [uploader]="uploader"/>
-    <div class="invalid-feedback">please add your story</div>
+    <input type="file" ng2FileSelect [uploader]="uploader" />
+    <div class="invalid-feedback">Zdieľaj príbeh</div>
   </div>
 
   <div>
-    Queue progress:
-    <div class="progress mb-4">
+    <div *ngIf="uploader.progress > 0" class="progress mb-4">
       <div
         class="progress-bar"
         role="progressbar"
@@ -38,7 +37,7 @@
       (click)="uploader.uploadAll()"
       [disabled]="!uploader.getNotUploadedItems().length"
     >
-      OK
+      Potvrď
     </button>
     <button
       class="btn btn-danger ml-1"
@@ -46,7 +45,7 @@
       (click)="cancel()"
       (click)="uploader.cancelAll()"
     >
-      Cancel
+      Zruš
     </button>
   </div>
 </form>

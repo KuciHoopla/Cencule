@@ -9,9 +9,6 @@ img {
   display: inline;
 }
 
-.add-blog {
-  position: absolute;
-  top: 67px;
-  left: 0;
-  z-index: 300;
+.navbar-brand {
+  margin-right: 20px;
 }

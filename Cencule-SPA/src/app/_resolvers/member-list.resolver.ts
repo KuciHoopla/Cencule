@@ -6,7 +6,6 @@ import { AlertifyService } from '../_services/alertify.service';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-
 @Injectable()
 export class MemberListResolver implements Resolve<User[]> {
   pageNumber = 1;
@@ -20,8 +19,8 @@ export class MemberListResolver implements Resolve<User[]> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
     // tslint:disable-next-line: no-string-literal
-    return this.userService.getUsers(this.pageNumber, this.pageSize).pipe(
-      catchError(error => {
+    return this.userService.getUsers().pipe(
+      catchError((error) => {
         this.alertify.error('Problem retrieving data');
         this.router.navigate(['/home']);
         return of(null);

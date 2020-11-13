@@ -12,6 +12,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 export class MemberCardComponent implements OnInit {
   @Input()
   user: User;
+  usersUrls: {};
 
   constructor(private authService: AuthService, private userService: UserService, private alertify: AlertifyService ) { }
 
@@ -26,4 +27,12 @@ export class MemberCardComponent implements OnInit {
       this.alertify.error(error);
     });
   }
+
+  // getUserMainPhoto() {
+  //   var users = this.userService.getUsers().subscribe();
+  //   for (const userUrl of users) {
+      
+  //   }
+  // }
+
 }

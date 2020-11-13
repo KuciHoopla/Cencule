@@ -1,21 +1,22 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
   <div class="container">
     <a class="navbar-brand" [routerLink]="['/']">Cencule</a>
-    <app-blog-add class="add-blog" *ngIf="loggedIn()"></app-blog-add>
     <app-weather></app-weather>
+
     <app-register-block *ngIf="!loggedIn()"></app-register-block>
 
-    <!-- <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
+    <ul *ngIf="loggedIn()" class="navbar-nav ml-1">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/members']">Matches</a>
-      </li>
+        <a class="nav-link" [routerLink]="['/members']">Členovia</a>
+        <!-- </li>
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/lists']">Lists</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/messages']">Messeges</a>
+      </li> -->
       </li>
-    </ul> -->
+    </ul>
 
     <div *ngIf="loggedIn()" class="dropdown" dropdown>
       <span class="mr-2">
@@ -27,11 +28,11 @@
 
       <div class="dropdown-menu mt-3" *dropdownMenu>
         <a class="dropdown-item" [routerLink]="['/member/edit']">
-          <i class="fa fa-user"></i> Edit profile</a
+          <i class="fa fa-user"></i> Editovať profil</a
         >
         <div class="dropdown-devided"></div>
         <a class="dropdown-item" (click)="loggOut()">
-          <i class="fa fa-sign-out"></i> Log out</a
+          <i class="fa fa-sign-out"></i>Odhlásiť sa</a
         >
       </div>
     </div>
@@ -46,7 +47,7 @@
         class="form-control mr-sm-2"
         type="text"
         name="username"
-        placeholder="Username"
+        placeholder="Meno"
         required
         [(ngModel)]="model.username"
       />
@@ -54,7 +55,7 @@
         class="form-control mr-sm-2"
         type="password"
         name="password"
-        placeholder="Password"
+        placeholder="Heslo"
         required
         [(ngModel)]="model.password"
       />
@@ -63,7 +64,7 @@
         class="btn btn-success my-2 my-sm-0"
         type="submit"
       >
-        Login
+        Prihlásiť sa
       </button>
     </form>
   </div>
