@@ -148,6 +148,9 @@ namespace Cencule.API.Migrations
                     b.Property<string>("Username")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Blocked")
+                    .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");

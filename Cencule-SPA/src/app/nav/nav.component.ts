@@ -18,16 +18,18 @@ export class NavComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
+    this.authService.currentPhotoUrl.subscribe(
+      (photoUrl) => (this.photoUrl = photoUrl)
+    );
   }
 
   login() {
     this.authService.login(this.model).subscribe(
       (next) => {
-        this.alertify.success('Logged in successfully');
+        this.alertify.success('Prihlásený');
       },
       (error) => {
-        this.alertify.error(error);
+        this.alertify.error('Problém s prihlásením');
       },
       () => {
         this.router.navigate(['/home']);

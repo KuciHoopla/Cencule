@@ -19,10 +19,12 @@ import {
 } from '@angular/forms';
 import { User } from '../_models/user';
 import { Blog } from '../_models/blog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { BlogUpdate } from '../_models/blogUpdate';
+import { UserService } from '../_services/user.service';
+import { toInt } from 'ngx-bootstrap/chronos/utils/type-checks';
 
 @Component({
   selector: 'app-blog-add',
@@ -37,6 +39,7 @@ export class BlogAddComponent implements OnInit {
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
+  blocked: string;
   user: User;
   userId = this.authService.decodedToken.nameid;
   blogAddForm: FormGroup;
@@ -47,12 +50,14 @@ export class BlogAddComponent implements OnInit {
     private alertify: AlertifyService,
     private fb: FormBuilder,
     private router: Router,
-    private blogAddService: BlogAddService
+    private blogAddService: BlogAddService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
     this.createBlogAddForm();
     this.intializeUploader();
+    this.isBlocked();
   }
 
   createBlogAddForm() {
@@ -65,6 +70,16 @@ export class BlogAddComponent implements OnInit {
     if (this.blogAddForm.valid) {
       document.getElementById('add-blog-btn').style.display = 'block';
     }
+  }
+
+  isBlocked() {
+    let blocked;
+    this.userService.getUser(this.userId).subscribe((data: User) => {
+      blocked = data.blocked;
+      if (blocked === '0') {
+        this.blocked = blocked;
+      }
+    });
   }
 
   cancel() {
@@ -105,16 +120,16 @@ export class BlogAddComponent implements OnInit {
             userId: this.userId,
             mainUrl: '',
             userName: '',
+            blocked: '',
           };
           this.blog = blog;
-          console.log(this.blog.id);
           const descriptionFromForm = Object.assign({}, this.blogAddForm.value);
           this.blogUpdate = descriptionFromForm;
           this.blogAddService
             .updateBlog(this.blog.id, this.blogUpdate)
             .subscribe(
               (next) => {
-                this.alertify.success('blog added');
+                this.alertify.success('blog pridaný');
                 this.router.navigateByUrl('/', {
                   skipLocationChange: true,
                 });
@@ -123,7 +138,7 @@ export class BlogAddComponent implements OnInit {
                   'none';
               },
               (error) => {
-                this.alertify.error('problem to add blog');
+                this.alertify.error('problém s pridaním blogu');
               }
             );
           this.blogAddForm.reset();

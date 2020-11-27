@@ -8,4 +8,5 @@ export interface Blog {
   userId: string;
   mainUrl: string;
   userName: string;
+  blocked: string;
 }

@@ -8,6 +8,9 @@
           alt="{{ user.knownAs }}"
         />
         <div class="card-body">
+          <div class="name">
+            <strong>{{ user.knownAs }}</strong>
+          </div>
           <div>
             <strong>Adresa:</strong>
             <p>{{ user.city }}, {{ user?.country }}</p>
@@ -17,20 +20,12 @@
             <p>{{ user.age }}</p>
           </div>
           <div>
-            <strong>Kedy bol člen aktívny:</strong>
+            <strong>Aktívny:</strong>
             <p>{{ user.lastActive | timeago }}</p>
           </div>
           <div>
-            <strong>Registrovaný už:</strong>
+            <strong>Registrovaný:</strong>
             <p>{{ user.created | date: "mediumDate" }}</p>
-          </div>
-          <div class="card-footer">
-            <div class="btn-group d-flex">
-              <button class="btn btn-primary w-100">Like</button>
-              <button class="btn btn-success w-100" (click)="selectTab(3)">
-                Správa
-              </button>
-            </div>
           </div>
         </div>
       </div>

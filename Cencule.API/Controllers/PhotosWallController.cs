@@ -14,7 +14,7 @@ namespace Cencule.API.Controllers
     [Route("/api/photos")]
     [ApiController]
 
-    
+
     public class PhotosWallController : ControllerBase
     {
         private readonly ICenculeRepository _repo;
@@ -37,7 +37,7 @@ namespace Cencule.API.Controllers
             _cloudinary = new Cloudinary(acc);
 
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> GetPhotos()
         {
@@ -51,10 +51,11 @@ namespace Cencule.API.Controllers
                 var userToReturn = _mapper.Map<UserForListDTO>(user);
                 photoWall.UserName = userToReturn.KnownAs;
                 photoWall.MainUrl = userToReturn.PhotoUrl;
+                photoWall.Blocked = userToReturn.Blocked;
                 photosForWall.Add(photoWall);
 
             };
-            
+
             return Ok(photosForWall);
         }
 

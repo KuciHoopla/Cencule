@@ -1,7 +1,37 @@
 <div class="container mt4">
-  <div class="row">
-    <div *ngFor="let user of users" class="col-lg-2 col-md-3 col-sm-6">
+  <div class="container mb-4">
+    <input
+      #box
+      id="inputField"
+      maxlength="25"
+      onfocus="this.value=''"
+      value="filter"
+      type="text"
+      (keyup)="(0)"
+    />
+    <p style="display: none" id="filter">{{ box.value }}</p>
+    <button
+      [disabled]="!box.value"
+      class="btn btn-success ml-2"
+      (click)="filter()"
+    >
+      Hľadaj
+    </button>
+    <button class="btn btn-danger ml-2" (click)="clear()">Zruš</button>
+  </div>
+
+  <div *ngIf="filteredUsers" class="row">
+    <div *ngFor="let user of filteredUsers" class="col-lg-2 col-md-3 col-sm-6">
       <app-member-card [user]="user"></app-member-card>
+    </div>
+  </div>
+
+  <div *ngIf="filteredUsers.length < 1" class="row">
+    <div *ngFor="let user of users" class="col-lg-2 col-md-3 col-sm-6">
+      <app-member-card
+        *ngIf="user.id != userId"
+        [user]="user"
+      ></app-member-card>
     </div>
   </div>
 </div>

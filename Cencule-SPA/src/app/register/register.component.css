@@ -1,0 +1,9 @@
+.wrapper {
+  position: relative;
+}
+.security {
+  position: absolute;
+  right: -55px;
+
+  height: 50px;
+}

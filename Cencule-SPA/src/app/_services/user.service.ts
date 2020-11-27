@@ -21,7 +21,7 @@ export class UserService {
     return this.http.get<User[]>(this.baseUrl + 'users');
   }
 
-  getUser(id): Observable<User> {
+  getUser(id){
     return this.http.get<User>(this.baseUrl + 'users/' + id);
   }
 
@@ -31,6 +31,13 @@ export class UserService {
 
   updateUser(id: number, user: User) {
     return this.http.put(this.baseUrl + 'users/' + id, user);
+  }
+
+  blockUser(id: number, idToBlock: number, user: User) {
+    console.log(id);
+    console.log(idToBlock);
+    console.log(user);
+    return this.http.put(this.baseUrl + 'users/' + id + '/' + idToBlock, user);
   }
 
   setMainPhoto(userId: number, id: number) {

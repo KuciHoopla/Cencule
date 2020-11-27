@@ -10,5 +10,7 @@ namespace Cencule.API.Dtos
         public DateTime DateAdded { get; set; }
         public bool IsMain { get; set; }
         public string PublicId { get; set; }
+        public string Blocked { get; set; }
+
     }
 }

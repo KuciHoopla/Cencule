@@ -2,6 +2,7 @@
   <div
     id="card{{ i }}"
     *ngFor="let photo of photos; let last = last; let i = index"
+    [className]="photo.blocked !== null ? 'hidden' : 'active'"
     [ngClass]="{ 'last-child': last }"
     class="card box mb-2"
   >

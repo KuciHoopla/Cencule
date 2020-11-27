@@ -53,9 +53,12 @@ export class RegisterComponent implements OnInit {
             Validators.maxLength(8),
           ],
         ],
+        security: ['', [Validators.required]],
         confirmPassword: ['', Validators.required],
       },
-      { validator: this.passwordMatchValidator }
+      {
+        validator: this.passwordMatchValidator && this.securityMatchValidator,
+      }
     );
   }
 
@@ -63,6 +66,10 @@ export class RegisterComponent implements OnInit {
     return g.get('password').value === g.get('confirmPassword').value
       ? null
       : { mismatch: true };
+  }
+
+  securityMatchValidator(g: FormGroup) {
+    return g.get('security').value === 'dom' ? null : { mismatch1: true };
   }
 
   register() {

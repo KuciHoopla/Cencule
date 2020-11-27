@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
   <div class="container">
-    <a class="navbar-brand" [routerLink]="['/']">Cencule</a>
+    <a [routerLink]="['/']">
+      <img class="logo" src="{{ '../../assets/CenculeBrand.png' }}" alt="" />
+    </a>
     <app-weather></app-weather>
 
     <app-register-block *ngIf="!loggedIn()"></app-register-block>
@@ -8,13 +10,6 @@
     <ul *ngIf="loggedIn()" class="navbar-nav ml-1">
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/members']">Členovia</a>
-        <!-- </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/lists']">Lists</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/messages']">Messeges</a>
-      </li> -->
       </li>
     </ul>
 

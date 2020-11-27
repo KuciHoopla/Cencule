@@ -20,6 +20,9 @@ namespace Cencule.API.Dtos
         public string City { get; set; }
         public string Country { get; set; }
         public string PhotoUrl { get; set; }
+
+        public string Blocked { get; set; }
+
         public ICollection <PhotosForDetailedDTO>  Photos { get; set; }
     }
 }

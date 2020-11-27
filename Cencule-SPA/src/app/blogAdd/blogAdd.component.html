@@ -1,4 +1,9 @@
-<button id="add-blog-btn" class="btn btn-success" (click)="showUp()">
+<button
+  *ngIf="blocked !== '0'"
+  id="add-blog-btn"
+  class="btn btn-success"
+  (click)="showUp()"
+>
   Pridaj príbeh
 </button>
 

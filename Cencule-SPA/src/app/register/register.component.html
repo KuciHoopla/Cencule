@@ -1,5 +1,6 @@
 <form id="register-block" [formGroup]="registerForm" (ngSubmit)="register()">
   <h2 class="text-center text-primary">Sign Up</h2>
+
   <hr />
 
   <!-- =====
@@ -222,6 +223,38 @@ city and country
       "
     >
       Krajina je povinná
+    </div>
+  </div>
+
+  <!-- =====
+security answer
+===== -->
+
+  <div class="wrapper form-group">
+    <img class="security" src="{{ '../../assets/house.png' }}" alt="" />
+
+    <input
+      [ngClass]="{
+        'is-invalid':
+          (registerForm.get('security').errors &&
+            registerForm.get('security').touched) ||
+          (registerForm.get('security').touched &&
+            registerForm.hasError('mismatch1'))
+      }"
+      class="form-control"
+      placeholder="Čo je na obrázku vpravo?"
+      formControlName="security"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        (registerForm.get('security').touched &&
+          registerForm.get('security').hasError('odpoved sa vyzaduje')) ||
+        (registerForm.get('security').touched &&
+          registerForm.hasError('mismatch1'))
+      "
+    >
+      Odpoveď je povinná
     </div>
   </div>
 

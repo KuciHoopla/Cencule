@@ -16,6 +16,11 @@
   position: relative;
 }
 
+.blocked {
+  background-color: rgb(206, 74, 74);
+  opacity: 50%;
+}
+
 .member-icons {
   position: absolute;
   bottom: -30;

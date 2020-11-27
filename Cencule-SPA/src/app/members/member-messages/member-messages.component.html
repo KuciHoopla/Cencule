@@ -1,69 +1,4 @@
 <div class="card">
-  <div class="card-body">
-    <div *ngIf="messages?.length === 0">
-      <p>žiadne správy... napíš niečo dole do riadku</p>
-    </div>
-
-    <ul class="chat">
-      <li *ngFor="let message of messages">
-        <!-- to me -->
-
-        <div *ngIf="message.senderId == recipientId">
-          <span class="chat-img float-left">
-            <img
-              src="{{ message.senderPhotoUrl }}"
-              alt="{{ message.senderKnownAs }}"
-              class="rounded-circle"
-            />
-          </span>
-          <div class="chat-body">
-            <div class="header">
-              <strong class="primary-font">
-                {{ message.senderKnownAs }}
-              </strong>
-              <small class="text-muted float-right">
-                <span class="fa fa-clock-o">{{
-                  message.messageSent | timeago
-                }}</span>
-              </small>
-            </div>
-            <p>{{ message.content }}</p>
-          </div>
-        </div>
-
-        <!-- to them -->
-
-        <div *ngIf="message.senderId != recipientId">
-          <span class="chat-img float-right">
-            <img
-              src="{{ message.senderPhotoUrl }}"
-              alt="{{ message.senderKnownAs }}"
-              class="rounded-circle"
-            />
-          </span>
-          <div class="chat-body">
-            <div class="header">
-              <small class="text-muted">
-                <span class="fa fa-clock-o mr-2">{{
-                  message.messageSent | timeago
-                }}</span>
-                <span *ngIf="!message.isRead" class="text-danger"
-                  >(neprečítané)</span
-                >
-                <span *ngIf="message.isRead" class="text-success"
-                  >(prečítané {{ message.dateRead | timeago }})</span
-                >
-              </small>
-              <strong class="primary-font float-right">
-                {{ message.senderKnownAs }}
-              </strong>
-            </div>
-            <p>{{ message.content }}</p>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
   <div class="card-footer">
     <form #messageForm="ngForm" (ngSubmit)="messageForm.valid && sendMessage()">
       <div class="input-group">
@@ -76,11 +11,63 @@
           placeholder="pošli súkromnú správu"
         />
         <div class="input-group-append">
-          <button class="btn btn-primary" [disabled]="!messageForm.valid">
+          <button class="btn btn-success" [disabled]="!messageForm.valid">
             Odošli
           </button>
         </div>
       </div>
     </form>
+  </div>
+  <div class="card-body">
+    <div *ngIf="messages?.length === 0">
+      <p>žiadne správy... napíš niečo</p>
+    </div>
+
+    <ul id="message-wrapper" class="chat">
+      <li *ngFor="let message of messages">
+        <!-- to me -->
+
+        <div *ngIf="message.senderId == recipientId">
+          <div class="chat-body received">
+            <div class="header">
+              <strong class="primary-font mr-2 ml-1">
+                {{ message.senderKnownAs }}
+              </strong>
+              <small>
+                <span class="mr-2 ml-1">{{
+                  message.messageSent | timeago
+                }}</span>
+              </small>
+            </div>
+            <p class="received-message">{{ message.content }}</p>
+          </div>
+        </div>
+
+        <!-- to them -->
+
+        <div *ngIf="message.senderId != recipientId">
+          <div class="chat-body">
+            <div class="sent" style="width: 40%">
+              <div class="header">
+                <small>
+                  <span class="mr-2 ml-1">{{
+                    message.messageSent | timeago
+                  }}</span>
+                  <span
+                    *ngIf="!message.isRead"
+                    class="text-danger fa fa-clock-o mr-2 ml-1"
+                  ></span>
+                  <span
+                    *ngIf="message.isRead"
+                    class="text-success fa fa-check mr-2 ml-1"
+                  ></span>
+                </small>
+              </div>
+              <p class="sent-message">{{ message.content }}</p>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
 </div>

@@ -1,4 +1,7 @@
-<div class="card mb-4">
+<div
+  [className]="user.blocked !== null ? 'blocked' : 'active'"
+  class="card mb-4"
+>
   <div class="card-img-wrapper">
     <img
       class="card-img-top"
@@ -12,17 +15,28 @@
         </button>
       </li>
       <li class="list-inline-item">
-        <button class="btn btn-primary" (click)="sendLike(user.id)">
-          <i class="fa fa-heart" style="color: red"></i>
-        </button>
-      </li>
-      <li class="list-inline-item">
         <button
           class="btn btn-primary"
           [routerLink]="['/members/', user.id]"
           [queryParams]="{ tab: 3 }"
         >
           <i class="fa fa-envelope" routerLinkActive="router-link-active"></i>
+        </button>
+      </li>
+      <li
+        *ngIf="admin === true && user.blocked === null"
+        class="list-inline-item"
+      >
+        <button class="btn btn-primary" (click)="blockUser(user)">
+          <i class="fa fa-lock"></i>
+        </button>
+      </li>
+      <li
+        *ngIf="admin === true && user.blocked !== null"
+        class="list-inline-item"
+      >
+        <button class="btn btn-success" (click)="unBlockUser(user)">
+          <i class="fa fa-unlock"></i>
         </button>
       </li>
     </ul>

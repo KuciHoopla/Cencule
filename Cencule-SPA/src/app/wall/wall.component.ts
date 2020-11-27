@@ -9,9 +9,7 @@ import { User } from '../_models/user';
   styleUrls: ['./wall.component.css'],
 })
 export class WallComponent implements OnInit {
-  constructor(
-    private route: ActivatedRoute
-  ) {}
+  constructor(private route: ActivatedRoute) {}
   photos: PhotoWall[];
   users: User[];
 

@@ -59,12 +59,28 @@ namespace Cencule.API.Controllers
 
             var userFromRepo = await _repo.GetUser(id);
 
-            _mapper.Map(userForUpdateDto, userFromRepo); //this gonna execute the mapping, write update from Dto to repo
+            _mapper.Map(userForUpdateDto, userFromRepo);
 
             if (await _repo.SaveAll())
                 return NoContent();
 
-            throw new Exception($"Updating user {id} failed on save");
+            throw new Exception($"Uloženie zmien člena {id} zlyhalo");
+        }
+
+        [HttpPut("{id}/{idToBlock}")]
+        public async Task<IActionResult> BlockUser(int id, int idToBlock,  UserForUpdateDto userForUpdateDto)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var userFromRepo = await _repo.GetUser(idToBlock);
+
+            _mapper.Map(userForUpdateDto, userFromRepo);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Uloženie zmien člena {idToBlock} zlyhalo");
         }
 
         [HttpPost("{id}/like/{recipientId}")]
@@ -77,7 +93,7 @@ namespace Cencule.API.Controllers
             var like = await _repo.GetLike(id, recipientId);
 
             if (like != null)
-                return BadRequest("You already like this user");
+                return BadRequest("Už si lajkoval tohto člena");
 
             if (await _repo.GetUser(recipientId) == null)
                 return NotFound();
@@ -93,7 +109,7 @@ namespace Cencule.API.Controllers
             if (await _repo.SaveAll())
                 return Ok();
 
-            return BadRequest("Failed to like user");
+            return BadRequest("Lajkovanie zlyhalo");
         }
 
     }

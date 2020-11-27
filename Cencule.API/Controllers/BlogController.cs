@@ -14,7 +14,7 @@ namespace Cencule.API.Controllers
     [Route("/api/blog")]
     [ApiController]
 
-    
+
     public class BlogController : ControllerBase
     {
         private readonly ICenculeRepository _repo;
@@ -37,7 +37,7 @@ namespace Cencule.API.Controllers
             _cloudinary = new Cloudinary(acc);
 
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> GetBlogs()
         {
@@ -51,10 +51,11 @@ namespace Cencule.API.Controllers
                 var userToReturn = _mapper.Map<UserForListDTO>(user);
                 blogForWall.UserName = userToReturn.KnownAs;
                 blogForWall.MainUrl = userToReturn.PhotoUrl;
+                blogForWall.Blocked = userToReturn.Blocked;
                 blogsForWall.Add(blogForWall);
 
             };
-            
+
             return Ok(blogsForWall);
         }
 
