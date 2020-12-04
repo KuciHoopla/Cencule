@@ -27,16 +27,16 @@
         *ngIf="admin === true && user.blocked === null"
         class="list-inline-item"
       >
-        <button class="btn btn-primary" (click)="blockUser(user)">
-          <i class="fa fa-lock"></i>
+        <button class="btn btn-success" (click)="blockUser(user)">
+          <i class="fa fa-unlock"></i>
         </button>
       </li>
       <li
         *ngIf="admin === true && user.blocked !== null"
         class="list-inline-item"
       >
-        <button class="btn btn-success" (click)="unBlockUser(user)">
-          <i class="fa fa-unlock"></i>
+        <button class="btn btn-primary" (click)="unBlockUser(user)">
+          <i class="fa fa-lock"></i>
         </button>
       </li>
     </ul>

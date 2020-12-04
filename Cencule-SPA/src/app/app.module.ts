@@ -54,6 +54,9 @@ import { PhotosResolver } from './_resolvers/photos.resolver';
 import { BlogsResolver } from './_resolvers/blogs.resolver';
 import { BlogAddComponent } from './blogAdd/blogAdd.component';
 import { BlogAddService } from './_services/blogAdd.service';
+import { LakesComponent } from './lakes/lakes.component';
+import { LakeService } from './_services/lake.service';
+import { LakesResolver } from './_resolvers/lakes.resolver';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -79,6 +82,7 @@ export function tokenGetter() {
     WallComponent,
     BlogComponent,
     BlogAddComponent,
+    LakesComponent,
   ],
 
   imports: [
@@ -121,6 +125,8 @@ export function tokenGetter() {
     PhotosResolver,
     BlogsResolver,
     BlogAddService,
+    LakeService,
+    LakesResolver,
   ],
 
   bootstrap: [AppComponent],

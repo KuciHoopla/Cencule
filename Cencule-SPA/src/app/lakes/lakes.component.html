@@ -1,0 +1,20 @@
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Jazero</th>
+        <th scope="col">Teplota</th>
+        <th scope="col">Datum</th>
+        <th scope="col">Pridal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lake of lakes; let i = index">
+        <td>{{ lake.name }}</td>
+        <td>{{ lake.temperature }}°C</td>
+        <td>{{ lake.dateAdded | timeago }}</td>
+        <td><img src="{{ lake.mainUrl }}" alt="" />{{ lake.userName }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -52,20 +52,6 @@ namespace Cencule.API.Migrations
                     b.ToTable("Blogs");
                 });
 
-            modelBuilder.Entity("Cencule.API.Models.Like", b =>
-                {
-                    b.Property<int>("LikerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("LikeeId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("LikerId", "LikeeId");
-
-                    b.HasIndex("LikeeId");
-
-                    b.ToTable("Likes");
-                });
 
             modelBuilder.Entity("Cencule.API.Models.Message", b =>
                 {
@@ -196,20 +182,7 @@ namespace Cencule.API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Cencule.API.Models.Value", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Values");
-                });
-
+         
             modelBuilder.Entity("Cencule.API.Models.Blog", b =>
                 {
                     b.HasOne("Cencule.API.Models.User", "User")
@@ -219,21 +192,7 @@ namespace Cencule.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Cencule.API.Models.Like", b =>
-                {
-                    b.HasOne("Cencule.API.Models.User", "Likee")
-                        .WithMany("Likers")
-                        .HasForeignKey("LikeeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Cencule.API.Models.User", "Liker")
-                        .WithMany("Likees")
-                        .HasForeignKey("LikerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
+          
             modelBuilder.Entity("Cencule.API.Models.Message", b =>
                 {
                     b.HasOne("Cencule.API.Models.User", "Recipient")

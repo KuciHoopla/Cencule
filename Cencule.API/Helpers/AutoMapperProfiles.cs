@@ -27,6 +27,8 @@ namespace Cencule.API.Helpers
             CreateMap<BlogForCreationDTO, Blog>();
             CreateMap<UserForUpdateDto, User>();
             CreateMap<Photo, PhotoForReturnDto>();
+            CreateMap<Lake, LakeForReturnDTO>();
+            CreateMap<LakeForCreationDTO, Lake>();
             CreateMap<PhotoForCreationDto, Photo>();
             CreateMap<UserForRegisterDto, User>();
             CreateMap<MessageForCreationDto, Message>().ReverseMap();

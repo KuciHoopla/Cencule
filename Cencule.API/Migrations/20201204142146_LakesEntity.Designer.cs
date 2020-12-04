@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cencule.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200821095451_MessageEntityAdded")]
-    partial class MessageEntityAdded
+    [Migration("20201204142146_LakesEntity")]
+    partial class LakesEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,7 +18,70 @@ namespace Cencule.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.6");
 
-         
+            modelBuilder.Entity("Cencule.API.Models.Blog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MainUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Blogs");
+                });
+
+            modelBuilder.Entity("Cencule.API.Models.Lake", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MainUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Temperature")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Lakes");
+                });
 
             modelBuilder.Entity("Cencule.API.Models.Message", b =>
                 {
@@ -38,10 +101,10 @@ namespace Cencule.API.Migrations
                     b.Property<DateTime>("MessageSent")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("RecipientId")
+                    b.Property<bool>("RecipientDeleted")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("RecipientDeleted")
+                    b.Property<int>("RecipientId")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("SenderDeleted")
@@ -74,6 +137,9 @@ namespace Cencule.API.Migrations
                     b.Property<bool>("IsMain")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("MainUrl")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("PublicId")
                         .HasColumnType("TEXT");
 
@@ -82,6 +148,9 @@ namespace Cencule.API.Migrations
 
                     b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -95,6 +164,9 @@ namespace Cencule.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Blocked")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("City")
                         .HasColumnType("TEXT");
@@ -123,7 +195,7 @@ namespace Cencule.API.Migrations
                     b.Property<DateTime>("LastActive")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("LookingFor")
+                    b.Property<string>("Notes")
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("PasswordHash")
@@ -135,14 +207,28 @@ namespace Cencule.API.Migrations
                     b.Property<string>("Username")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Blocked")
-                    .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Cencule.API.Models.Blog", b =>
+                {
+                    b.HasOne("Cencule.API.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Cencule.API.Models.Lake", b =>
+                {
+                    b.HasOne("Cencule.API.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
             modelBuilder.Entity("Cencule.API.Models.Message", b =>
                 {

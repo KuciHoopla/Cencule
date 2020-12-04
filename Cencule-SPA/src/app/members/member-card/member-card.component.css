@@ -17,7 +17,6 @@
 }
 
 .blocked {
-  background-color: rgb(206, 74, 74);
   opacity: 50%;
 }
 
@@ -29,7 +28,6 @@
   padding: 0;
   margin-right: auto;
   margin-left: auto;
-  opacity: 0;
 }
 
 .card-img-wrapper:hover .member-icons {
@@ -41,17 +39,30 @@
   transition: all 0.4s ease-in-out;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 600px) {
+  .animate {
+    transition: none;
+  }
   .card-img-wrapper {
+    opacity: 1 !important;
     height: 100px;
+    margin-bottom: 10px;
+    border: 0.2px solid rgba(0, 0, 255, 0.295);
   }
   .card-img-top {
     height: 100%;
     width: 100px;
   }
+
+  .card-body {
+    position: absolute;
+    top: 3px;
+    left: 50%;
+  }
+
   .member-icons {
-    bottom: -30;
-    left: 40px;
+    bottom: 0;
     opacity: 1;
+    left: 40%;
   }
 }

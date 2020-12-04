@@ -3,9 +3,8 @@ import { User } from '../../_models/user';
 import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
-import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
+import { Pagination } from 'src/app/_models/pagination';
 import { __values } from 'tslib';
-import { LowerCasePipe } from '@angular/common';
 import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
@@ -23,7 +22,6 @@ export class MemberListComponent implements OnInit {
   pagination: Pagination;
 
   constructor(
-    private userService: UserService,
     private alertify: AlertifyService,
     private route: ActivatedRoute,
     private authService: AuthService
