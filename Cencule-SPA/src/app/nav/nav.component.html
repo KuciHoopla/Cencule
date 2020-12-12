@@ -12,13 +12,33 @@
 
     <ul *ngIf="loggedIn()" class="navbar-nav ml-1">
       <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/']"
+          ><i class="fa fa-snowflake-o"></i
+        ></a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/photos']"
+          ><i class="fa fa-camera-retro"></i
+        ></a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/blogs']"
+          ><i class="fa fa-id-card-o"></i
+        ></a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/members']"
-          ><i class="fa fa-address-book-o"></i
+          ><i class="fa fa-users"></i
         ></a>
       </li>
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/lakes']"
           ><i class="fa fa-thermometer-empty"></i
+        ></a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/messages']"
+          ><i class="fa fa-envelope"></i
         ></a>
       </li>
     </ul>

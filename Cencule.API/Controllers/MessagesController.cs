@@ -43,20 +43,14 @@ namespace Cencule.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetMessagesForUser(int userId,
-            [FromQuery] MessageParams messageParams)
+        public async Task<IActionResult> GetMessagesForUser(int userId)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            messageParams.UserId = userId;
-
-            var messagesFromRepo = await _repo.GetMessagesForUser(messageParams);
+            var messagesFromRepo = await _repo.GetMessagesForUser(userId);
 
             var messages = _mapper.Map<IEnumerable<MessageToReturnDto>>(messagesFromRepo);
-
-            Response.AddPagination(messagesFromRepo.CurrentPage, messagesFromRepo.PageSize,
-                messagesFromRepo.TotalCount, messagesFromRepo.TotalPages);
 
             return Ok(messages);
         }
@@ -76,7 +70,8 @@ namespace Cencule.API.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> CreateMessage(int userId, MessageForCreationDto messageForCreationDto)
+        public async Task<IActionResult> CreateMessage(int userId,
+        MessageForCreationDto messageForCreationDto)
         {
             var sender = await _repo.GetUser(userId);
             if (sender.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -115,7 +110,7 @@ namespace Cencule.API.Controllers
                 return Unauthorized();
 
             var messageFromRepo = await _repo.GetMessage(id);
-            
+
             if (messageFromRepo.SenderId == userId)
                 messageFromRepo.SenderDeleted = true;
 
@@ -150,7 +145,7 @@ namespace Cencule.API.Controllers
             await _repo.SaveAll();
 
             return NoContent();
-            
+
 
             throw new Exception("Error deleting a message");
 

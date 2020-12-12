@@ -1,3 +1,27 @@
 #add-blog-block {
   display: none;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 5px 5px 10px rgba(17, 17, 17, 0.685);
+}
+
+.wrapper {
+  margin: 0;
+  width: 100%;
+  display: flex;
+}
+
+.blog {
+  width: 65%;
+}
+
+.add-blog {
+  display: block;
+  margin-top: 69px;
+}
+
+@media only screen and (max-width: 800px) {
+  .blog {
+    width: 100%;
+  }
 }

@@ -4,12 +4,14 @@
   class="btn btn-success"
   (click)="showUp()"
 >
-  Pridaj príbeh
+  <i class="fa fa-pencil" aria-hidden="true"></i>
 </button>
 
 <form id="add-blog-block" [formGroup]="blogAddForm" (ngSubmit)="blogAdd()">
   <div class="form-group">
-    <input
+    <textarea
+      rows="10"
+      maxlength="500"
       [ngClass]="{
         'is-invalid':
           blogAddForm.get('description').errors &&
@@ -18,8 +20,9 @@
       type="text"
       class="form-control is-invalid"
       formControlName="description"
-      placeholder="your story"
-    />
+      placeholder="pridaj pribeh"
+    >
+    </textarea>
     <input type="file" ng2FileSelect [uploader]="uploader" />
     <div class="invalid-feedback">Zdieľaj príbeh</div>
   </div>

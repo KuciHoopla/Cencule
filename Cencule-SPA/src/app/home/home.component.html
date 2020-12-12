@@ -1,11 +1,1 @@
-<div class="wrapper">
-  <div class="container blog">
-    <app-blog-add class="add-blog" *ngIf="loggedIn()"></app-blog-add>
 
-    <app-blog [className]="!loggedIn() ? 'add-blog' : ''"></app-blog>
-  </div>
-
-  <div class="container photo-wall">
-    <app-wall></app-wall>
-  </div>
-</div>

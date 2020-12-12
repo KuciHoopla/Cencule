@@ -14,8 +14,8 @@ export class WallComponent implements OnInit {
   users: User[];
 
   ngOnInit() {
-    this.route.data.subscribe((data: { photoWall: PhotoWall[] }) => {
-      this.photos = data.photoWall;
+    this.route.data.subscribe((data: { photos: PhotoWall[] }) => {
+      this.photos = data.photos;
     });
   }
 

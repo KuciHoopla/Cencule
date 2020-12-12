@@ -21,7 +21,7 @@ export class UserService {
     return this.http.get<User[]>(this.baseUrl + 'users');
   }
 
-  getUser(id){
+  getUser(id): Observable<User> {
     return this.http.get<User>(this.baseUrl + 'users/' + id);
   }
 
@@ -34,9 +34,6 @@ export class UserService {
   }
 
   blockUser(id: number, idToBlock: number, user: User) {
-    console.log(id);
-    console.log(idToBlock);
-    console.log(user);
     return this.http.put(this.baseUrl + 'users/' + id + '/' + idToBlock, user);
   }
 
@@ -58,37 +55,10 @@ export class UserService {
     );
   }
 
-  getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
-    const paginatedResult: PaginatedResult<Message[]> = new PaginatedResult<
-      Message[]
-    >();
-
-    let params = new HttpParams();
-
-    params = params.append('MessageContainer', messageContainer);
-
-    if (page != null && itemsPerPage != null) {
-      params = params.append('pageNumber', page);
-      params = params.append('pageSize', itemsPerPage);
-    }
-
-    return this.http
-      .get<Message[]>(this.baseUrl + 'users/' + id + '/messages/', {
-        observe: 'response',
-        params,
-      })
-      .pipe(
-        map((response) => {
-          paginatedResult.result = response.body;
-          if (response.headers.get('Pagination') !== null) {
-            paginatedResult.pagination = JSON.parse(
-              response.headers.get('Pagination')
-            );
-          }
-
-          return paginatedResult;
-        })
-      );
+  getMessages(id: number) {
+    return this.http.get<Message[]>(
+      this.baseUrl + 'users/' + id + '/messages/'
+    );
   }
 
   getMessageThreat(id: number, recipientId: number) {

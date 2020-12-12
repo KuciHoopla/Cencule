@@ -28,6 +28,7 @@ export class MemberListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.userId = Number(this.userId);
     this.route.data.subscribe((data: { users: User[] }) => {
       this.users = data.users;
     });

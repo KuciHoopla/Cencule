@@ -130,10 +130,11 @@ export class BlogAddComponent implements OnInit {
             .subscribe(
               (next) => {
                 this.alertify.success('blog pridaný');
-                this.router.navigateByUrl('/', {
-                  skipLocationChange: true,
-                });
-                this.router.navigate(['app-blog']);
+                this.router
+                  .navigateByUrl('app-blogs', { skipLocationChange: true })
+                  .then(() => {
+                    this.router.navigate(['/blogs']);
+                  });
                 document.getElementById('add-blog-block').style.display =
                   'none';
               },

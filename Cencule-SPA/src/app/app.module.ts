@@ -6,8 +6,6 @@ import {
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { from } from 'rxjs';
-import { CommonModule } from '@angular/common';
 import { NavComponent } from './nav/nav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -57,6 +55,7 @@ import { BlogAddService } from './_services/blogAdd.service';
 import { LakesComponent } from './lakes/lakes.component';
 import { LakeService } from './_services/lake.service';
 import { LakesResolver } from './_resolvers/lakes.resolver';
+import { LakeAddComponent } from './lakeAdd/lakeAdd.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -83,6 +82,7 @@ export function tokenGetter() {
     BlogComponent,
     BlogAddComponent,
     LakesComponent,
+    LakeAddComponent,
   ],
 
   imports: [

@@ -14,6 +14,10 @@ export class LakesComponent implements OnInit {
   users: User[];
 
   ngOnInit() {
+    this.getLakes();
+  }
+
+  getLakes() {
     this.route.data.subscribe((data: { lakes: LakeWall[] }) => {
       this.lakes = data.lakes;
     });

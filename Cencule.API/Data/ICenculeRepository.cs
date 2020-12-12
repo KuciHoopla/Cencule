@@ -16,10 +16,11 @@ namespace Cencule.API.Data
         Task<Blog> GetBlog(int id);
         Task<List<Photo>> GetPhotos();
         Task<List<Lake>> GetLakes();
+
         Task<List<Blog>> GetBlogs();
         Task<Photo> GetMainPhotoFromUser(int userId);
         Task<Message> GetMessage(int id);
-        Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams);
+        Task<IEnumerable<Message>> GetMessagesForUser(int userId);
 
         Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId);
 

@@ -28,6 +28,7 @@ img {
 
 .fa {
   font-size: 20px;
+  margin-left: 30px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -41,4 +42,22 @@ img {
     flex-wrap: wrap;
     align-items: center;
   }
+  ul {
+    position: absolute;
+    top: 70px;
+    right: 10px;
+  }
+  .fa {
+    margin-left: 0;
+    display: block;
+    color: black;
+  }
+  .active .fa {
+    color: rgb(5, 5, 5);
+    padding-right: 3px;
+    border-right: 5px solid rgba(243, 12, 12, 0.692);
+    
+  }
+
+  
 }

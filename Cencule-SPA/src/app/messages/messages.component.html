@@ -1,96 +1,97 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="btn-group">
-      <button
-        class="btn btn-primary"
-        [(ngModel)]="messageContainer"
-        btnRadio="Unread"
-        (click)="loadMessages()"
+<div id="wrapper">
+  <div class="cells-container">
+    <div *ngFor="let user of users; let i = index">
+      <div
+        id="{{ i }}"
+        title="{{ user.id }}"
+        class="user-cell d-flex flex-row justify-content-start align-items-center"
+        *ngIf="ids.includes(user.id) && user.id !== userId"
+        (click)="switchClass(i)"
       >
-        <i class="fa fa-envelope"></i> Neprečítané
-      </button>
-      <button
-        class="btn btn-primary"
-        [(ngModel)]="messageContainer"
-        btnRadio="Inbox"
-        (click)="loadMessages()"
-      >
-        <i class="fa fa-envelope-open"></i> Doručené
-      </button>
-      <button
-        class="btn btn-primary"
-        [(ngModel)]="messageContainer"
-        btnRadio="Outbox"
-        (click)="loadMessages()"
-      >
-        <i class="fa fa-paper-plane"></i> Odoslané
-      </button>
+        <img src="{{ user.photoUrl }}" alt="{{ user.knownAs }}" />
+        <p>{{ user.knownAs }}</p>
+      </div>
     </div>
   </div>
 
-  <div class="row" *ngIf="messages.length == 0">
-    <h3>Žiadne správy</h3>
-  </div>
+  <!-- message body part -->
 
-  <div class="row" *ngIf="messages.length > 0">
-    <table class="table table-hover" style="cursor: pointer">
-      <tr>
-        <th style="width: 20%">Osoba</th>
-        <th style="width: 40%">Správa</th>
-        <th style="width: 20%">Čas</th>
-        <th style="width: 20%"></th>
-      </tr>
-      <tr
-        *ngFor="let message of messages"
-        [routerLink]="[
-          '/members',
-          messageContainer == 'Outbox' ? message.recipientId : message.senderId
-        ]"
-        [queryParams]="{ tab: 3 }"
-      >
-        <td>
-          <div *ngIf="messageContainer != 'Outbox'">
-            <img
-              src="{{ message?.senderPhotoUrl }}"
-              class="img-circle rounded-circle mr-1"
+  <div id="message-body" >
+    <div class="card" *ngIf="chatUserId !== -1">
+      <div class="card-footer">
+        <form
+          #messageForm="ngForm"
+          (ngSubmit)="messageForm.valid && sendMessage()"
+        >
+          <div class="input-group">
+            <input
+              type="text"
+              [(ngModel)]="newMessage.content"
+              name="content"
+              required
+              class="form-control input-sm"
+              placeholder="pošli súkromnú správu"
             />
-            <strong>{{ message.senderKnownAs }}</strong>
+            <div class="input-group-append">
+              <button class="btn btn-success" [disabled]="!messageForm.valid">
+                Odošli
+              </button>
+            </div>
           </div>
-          <div *ngIf="messageContainer == 'Outbox'">
-            <img
-              src="{{ message?.recipientPhotoUrl }}"
-              class="img-circle rounded-circle mr-1"
-            />
-            <strong>{{ message.recipientKnownAs }}</strong>
-          </div>
-        </td>
-        <td>{{ message.content }}</td>
-        <td>{{ message.messageSent | timeago }}</td>
-        <td>
-          <button
-            class="btn btn-danger"
-            (click)="$event.stopPropagation()"
-            (click)="deleteMessage(message.id)"
-          >
-            Zmazať
-          </button>
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
+        </form>
+      </div>
+      <div class="card-body">
+        <div *ngIf="messages?.length === 0">
+          <p>žiadne správy... napíš niečo</p>
+        </div>
 
-<div class="d-flex justify-content-center">
-  <pagination
-    [boundaryLinks]="true"
-    [totalItems]="pagination.totalItems"
-    [itemsPerPage]="pagination.itemsPerPage"
-    [(ngModel)]="pagination.currentPage"
-    (pageChanged)="pageChanged($event)"
-    previousText="&lsaquo;"
-    nextText="&rsaquo;"
-    firstText="&laquo;"
-    lastText="&raquo;"
-  >
-  </pagination>
+        <ul id="message-wrapper" class="chat">
+          <li *ngFor="let message of chatMessages">
+            <!-- to me -->
+
+            <div *ngIf="message.senderId == chatUserId">
+              <div class="chat-body received">
+                <div class="header">
+                  <strong class="primary-font mr-2 ml-1">
+                    {{ message.senderKnownAs }}
+                  </strong>
+                  <small>
+                    <span class="mr-2 ml-1">{{
+                      message.messageSent | timeago
+                    }}</span>
+                  </small>
+                </div>
+                <p class="received-message">{{ message.content }}</p>
+              </div>
+            </div>
+
+            <!-- to them -->
+
+            <div *ngIf="message.senderId == userId">
+              <div class="chat-body">
+                <div class="sent" style="width: 40%">
+                  <div class="header">
+                    <small>
+                      <span class="mr-2 ml-1">{{
+                        message.messageSent | timeago
+                      }}</span>
+                      <span
+                        *ngIf="!message.isRead"
+                        class="text-danger fa fa-clock-o mr-2 ml-1"
+                      ></span>
+                      <span
+                        *ngIf="message.isRead"
+                        class="text-success fa fa-check mr-2 ml-1"
+                      ></span>
+                    </small>
+                  </div>
+                  <p class="sent-message">{{ message.content }}</p>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

@@ -12,6 +12,10 @@ import { PhotosResolver } from './_resolvers/photos.resolver';
 import { BlogsResolver } from './_resolvers/blogs.resolver';
 import { LakesComponent } from './lakes/lakes.component';
 import { LakesResolver } from './_resolvers/lakes.resolver';
+import { BlogComponent } from './blog/blog.component';
+import { WallComponent } from './wall/wall.component';
+import { MessagesResolver } from './_resolvers/messages.resolver';
+import { MessagesComponent } from './messages/messages.component';
 
 export const appRoutes: Routes = [
   {
@@ -41,6 +45,17 @@ export const appRoutes: Routes = [
       },
 
       {
+        path: 'blogs',
+        component: BlogComponent,
+        resolve: { blogs: BlogsResolver },
+      },
+      {
+        path: 'photos',
+        component: WallComponent,
+        resolve: { photos: PhotosResolver },
+      },
+
+      {
         path: 'members/:id',
         component: MemberDetailComponent,
         resolve: { user: MemberDetailResolver },
@@ -50,6 +65,11 @@ export const appRoutes: Routes = [
         component: MemberEditComponent,
         resolve: { user: MemberEditResolver },
         canDeactivate: [PreventUnsavedChanges],
+      },
+      {
+        path: 'messages',
+        component: MessagesComponent,
+        resolve: { messagges: MessagesResolver },
       },
     ],
   },

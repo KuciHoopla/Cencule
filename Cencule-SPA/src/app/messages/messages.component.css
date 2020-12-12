@@ -10,6 +10,87 @@ td {
   vertical-align: middle;
 }
 
-.container {
-  margin-top: 70px !important;
+#wrapper {
+  margin: 90px auto 0px;
+  height: 80%;
+  width: 700px;
+  border: 1px solid black;
+  display: flex;
+}
+
+.cells-container {
+  height: 100%;
+  overflow: auto;
+}
+
+.user-cell:hover {
+  background-color: rgb(104, 101, 101);
+}
+
+.user-cell {
+  background-color: black;
+  height: 60px;
+  color: rgb(212, 212, 206);
+  width: 200px;
+  padding: 10px;
+  border: 1px solid rgba(227, 230, 229, 0.295);
+}
+
+.active {
+  background-color: rgb(104, 101, 101);
+}
+
+img {
+  height: 50px;
+  border-radius: 40%;
+  margin: 0 30px 0 10px;
+}
+
+/* message body  */
+
+.card {
+  border: none;
+  width: 500px;
+}
+
+.chat {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chat li {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.card-body {
+  overflow-y: scroll;
+  height: 400px;
+}
+
+.sent-message {
+  display: inline-block;
+  padding: 7px;
+  background-color: rgba(59, 129, 45, 0.877);
+  border-radius: 5px;
+  color: antiquewhite;
+  width: auto;
+}
+
+.received-message {
+  display: inline-block;
+  padding: 7px;
+  background-color: rgba(209, 22, 22, 0.877);
+  border-radius: 5px;
+  color: antiquewhite;
+  width: auto;
+}
+
+.received {
+  width: 40%;
+}
+
+.sent {
+  margin-left: 50%;
 }

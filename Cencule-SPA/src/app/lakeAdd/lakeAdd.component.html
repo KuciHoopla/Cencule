@@ -1,0 +1,53 @@
+<button id="add-lake-btn" class="btn btn-success" (click)="showUp()">
+  <i class="fa fa-pencil" aria-hidden="true"></i>
+</button>
+
+<form id="add-lake-block" [formGroup]="lakeAddForm" (ngSubmit)="lakeAdd()">
+  <div class="form-group">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          lakeAddForm.get('name').errors && lakeAddForm.get('name').touched
+      }"
+      maxlength="50"
+      type="text"
+      class="form-control is-invalid"
+      formControlName="name"
+      placeholder="pridaj jazero / max 50 pismenok"
+    />
+    <div class="invalid-feedback text-center">Vyplň jazero</div>
+
+    <label class="mt-2" for="temperature-select">Koľko stupňov</label>
+    <select
+      class="form-control"
+      id="temperature-select"
+      class="form-control is-invalid"
+      formControlName="temperature"
+      [ngClass]="{
+        'is-invalid':
+          lakeAddForm.get('temperature').errors &&
+          lakeAddForm.get('temperature').touched
+      }"
+      placeholder="nameraná teplota"
+    >
+      <option *ngFor="let n of numbers" [value]="n">
+        {{ n }}
+      </option>
+    </select>
+    <div class="invalid-feedback text-center">Vyplň teplotu</div>
+  </div>
+
+  <div class="form-group text-center">
+    <button
+      class="btn btn-success"
+      type="submit"
+      [disabled]="!lakeAddForm.valid"
+      (click)="lakeAdd()"
+    >
+      Potvrď
+    </button>
+    <button class="btn btn-danger ml-1" type="button" (click)="cancel()">
+      Zruš
+    </button>
+  </div>
+</form>

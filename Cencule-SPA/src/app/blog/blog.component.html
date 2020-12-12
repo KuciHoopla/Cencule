@@ -1,4 +1,6 @@
 <div class="wrapper">
+  <app-blog-add *ngIf="loggedIn()"></app-blog-add>
+
   <div
     [ngClass]="{ hidden: blog.blocked !== null }"
     *ngFor="let blog of blogs"

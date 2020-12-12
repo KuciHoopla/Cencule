@@ -1,0 +1,11 @@
+#add-lake-block {
+  display: none;
+}
+
+input,
+select,
+label {
+  display: block;
+  width: 300px;
+  margin: 0 auto;
+}
