@@ -19,6 +19,7 @@ export class MessagesComponent implements OnInit {
   chatUserId = -1;
   newMessage: any = {};
   chatMessages: Message[];
+  switchId: string;
 
   constructor(
     private userService: UserService,
@@ -104,6 +105,7 @@ export class MessagesComponent implements OnInit {
     const title = document.getElementById(i).title;
     this.chatUserId = Number(title);
     this.filterMessages();
+    this.switchId = String(i);
   }
 
   sendMessage() {
@@ -114,13 +116,16 @@ export class MessagesComponent implements OnInit {
         this.newMessage.content = '';
       },
       (error) => {
-        this.alertify.error(error);
+        this.alertify.error('problem poslat spravu');
       }
     );
+    setTimeout(() => {
+      this.switchClass(this.switchId);
+    }, 100);
   }
 
   filterMessages() {
-    let filteredMessages: Message[] = [
+    const filteredMessages: Message[] = [
       {
         id: 0,
         senderId: 0,
@@ -146,5 +151,22 @@ export class MessagesComponent implements OnInit {
       }
     }
     this.chatMessages = filteredMessages;
+  }
+
+  changeView() {
+    document.getElementById('cells-container').classList.add('hidden');
+    document.getElementById('message-body').classList.add('showed');
+    document.getElementById('card').style.display = 'block';
+
+    document.getElementById('btn-back').style.display = 'block';
+    document.getElementById('btn-back').classList.add('btn-active');
+  }
+
+  backToUsers() {
+    document.getElementById('cells-container').classList.remove('hidden');
+    document.getElementById('message-body').classList.remove('showed');
+    document.getElementById('btn-back').style.display = 'none';
+    document.getElementById('card').style.display = 'none';
+    document.getElementById('btn-back').classList.remove('btn-active');
   }
 }

@@ -21,7 +21,7 @@ export const appRoutes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    resolve: { photoWall: PhotosResolver, blog: BlogsResolver },
+    resolve: { blogs: BlogsResolver },
     runGuardsAndResolvers: 'always',
   },
   {

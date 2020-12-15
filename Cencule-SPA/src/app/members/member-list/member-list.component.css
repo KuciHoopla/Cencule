@@ -1,7 +1,18 @@
 .container {
-  margin-top: 90px !important;
+  margin-top: 120px !important;
+  padding-bottom: 40px;
 }
 
 .hidden {
   display: none;
+}
+
+.container-filter {
+  margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  .container-filter {
+    width: 100%;
+  }
 }

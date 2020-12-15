@@ -1,0 +1,31 @@
+.wrapper {
+  padding-top: 90px;
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px auto 30px;
+  height: 90vh;
+  overflow: auto;
+}
+
+.hidden {
+  display: none;
+}
+.user-name {
+  margin: 10px;
+  font-weight: bold;
+}
+
+.userMainPhoto {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin: 5px;
+}
+
+app-blog-add {
+  position: absolute;
+  top: 70px;
+  left: 10px;
+  z-index: 2;
+}

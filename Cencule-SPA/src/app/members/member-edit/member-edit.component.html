@@ -1,12 +1,9 @@
-<div class="container mt-4">
+<div class="container">
   <div class="row d-flex justify-content-around">
-    <div class="cal-sm-4">
-      <h1>Tvoj profil</h1>
-    </div>
     <div class="col-sm8">
       <div *ngIf="editForm.dirty" class="alert alert-info">
         <p class="font-weight-bold text-uppercase">
-          Info: Urobil si zmenz ale keď nepotvrdíš tak sa zmažu.
+          Info: Urobil si zmeny ale keď nepotvrdíš tak sa zmažu.
         </p>
       </div>
     </div>
@@ -50,7 +47,13 @@
     </div>
     <div class="col-sm-8">
       <div class="tab-panel">
-        <tabset class="member-tabset">
+        <tabset class="member-tabset"
+          ><tab class="edit-photos" heading="Upraviť fotky">
+            <app-photo-editor
+              [photos]="user.photos"
+              (getMemberPhotoChange)="updateMainPhoto($event)"
+            ></app-photo-editor>
+          </tab>
           <tab heading="Upraviť profil">
             <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
               <h4>Popis</h4>
@@ -92,12 +95,6 @@
                 />
               </div>
             </form>
-          </tab>
-          <tab class="edit-photos" heading="Upraviť fotky">
-            <app-photo-editor
-              [photos]="user.photos"
-              (getMemberPhotoChange)="updateMainPhoto($event)"
-            ></app-photo-editor>
           </tab>
         </tabset>
       </div>

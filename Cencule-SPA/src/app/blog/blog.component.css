@@ -29,3 +29,13 @@ app-blog-add {
   left: 10px;
   z-index: 2;
 }
+
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    padding-top: 140px;
+  }
+
+  app-blog-add {
+    top: 110px;
+  }
+}

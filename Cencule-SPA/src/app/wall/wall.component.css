@@ -49,3 +49,31 @@
 .photo-wall {
   width: 30%;
 }
+
+#add-photo {
+  display: block;
+  color: white;
+  text-align: center;
+  font-size: 15px;
+  position: absolute;
+  top: 70px;
+  left: 30px;
+  width: 35px;
+  height: 35px;
+  background-color: rgb(3, 148, 3);
+  border-radius: 10%;
+  padding: 6px;
+}
+
+@media only screen and (max-width: 600px) {
+  #add-photo {
+    top: 120px;
+    width: 40px;
+    overflow: hidden;
+
+    z-index: 2;
+  }
+  #photos-block {
+    padding-top: 50px;
+  }
+}

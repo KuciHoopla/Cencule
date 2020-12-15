@@ -1,5 +1,5 @@
 <div id="wrapper">
-  <div class="cells-container">
+  <div id="cells-container">
     <div *ngFor="let user of users; let i = index">
       <div
         id="{{ i }}"
@@ -7,6 +7,7 @@
         class="user-cell d-flex flex-row justify-content-start align-items-center"
         *ngIf="ids.includes(user.id) && user.id !== userId"
         (click)="switchClass(i)"
+        (click)="changeView()"
       >
         <img src="{{ user.photoUrl }}" alt="{{ user.knownAs }}" />
         <p>{{ user.knownAs }}</p>
@@ -16,8 +17,15 @@
 
   <!-- message body part -->
 
-  <div id="message-body" >
-    <div class="card" *ngIf="chatUserId !== -1">
+  <div id="message-body">
+    <button
+      id="btn-back"
+      class="btn btn-outline-secondary"
+      (click)="backToUsers()"
+    >
+      <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </button>
+    <div id="card" *ngIf="chatUserId !== -1">
       <div class="card-footer">
         <form
           #messageForm="ngForm"
