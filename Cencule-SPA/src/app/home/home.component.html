@@ -7,14 +7,6 @@
     <img class="card-img-top" src="{{ blog.url }}" alt="Card image cap" />
     <div class="card-body">
       <div class="card-text">
-        <div class="float-left d-flex flex-column" style="width: 80px">
-          <img
-            class="userMainPhoto float-left"
-            src="{{ blog.mainUrl }}"
-            alt="user photo"
-          />
-          <p class="user-name">{{ blog.userName }}</p>
-        </div>
         <p>{{ blog.description }}</p>
         <p>{{ blog.dateAdded | timeago }}</p>
       </div>

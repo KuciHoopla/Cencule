@@ -18,10 +18,22 @@
 }
 
 .container {
-  margin-top: 70px;
+  margin-top: 110px;
+  margin-bottom: 50px;
 }
 
 .name {
   font-size: large;
   margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  .card {
+    width: 100%;
+  }
+
+  .ngx-gallery {
+    max-width: 100%;
+    height: 300px;
+  }
 }

@@ -16,6 +16,8 @@ import { BlogComponent } from './blog/blog.component';
 import { WallComponent } from './wall/wall.component';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MessagesComponent } from './messages/messages.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { StatsResolver } from './_resolvers/stats.resolver';
 
 export const appRoutes: Routes = [
   {
@@ -70,6 +72,18 @@ export const appRoutes: Routes = [
         path: 'messages',
         component: MessagesComponent,
         resolve: { messagges: MessagesResolver },
+      },
+      {
+        path: 'statistics',
+        component: StatisticsComponent,
+        resolve: {
+          photos: PhotosResolver,
+          lakes: LakesResolver,
+          users: MemberListResolver,
+          messagges: MessagesResolver,
+          blogs: BlogsResolver,
+          userStatistics: StatsResolver,
+        },
       },
     ],
   },

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -42,7 +43,7 @@ namespace Cencule.API.Controllers
             return Ok(messageFromRepo);
         }
 
-        [HttpGet]
+        [HttpGet]   //get messages from user
         public async Task<IActionResult> GetMessagesForUser(int userId)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -54,6 +55,16 @@ namespace Cencule.API.Controllers
 
             return Ok(messages);
         }
+
+        [HttpGet("stats")]   // get number of messages from user
+        public async Task<IActionResult> GetUserStats(int userId)
+        {
+            var stats = await _repo.GetStats(userId);
+            var statsDto = _mapper.Map<StatisticDTO>(stats);
+
+            return Ok(statsDto);
+        }
+
 
         [HttpGet("thread/{recipientId}")]
         public async Task<IActionResult> GetMessageThread(int userId, int recipientId)

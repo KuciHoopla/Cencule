@@ -5,6 +5,7 @@ import { AuthService } from '../_services/auth.service';
 import { Router } from '@angular/router';
 import { AlertifyService } from '../_services/alertify.service';
 import { User } from '../_models/user';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-messages',
@@ -20,17 +21,17 @@ export class MessagesComponent implements OnInit {
   newMessage: any = {};
   chatMessages: Message[];
   switchId: string;
+  selectedUserControl = new FormControl();
 
   constructor(
     private userService: UserService,
     private authService: AuthService,
-    private alertify: AlertifyService,
-    private router: Router
+    private alertify: AlertifyService
   ) {}
 
   ngOnInit() {
-    this.loadMessages();
     this.userId = Number(this.userId);
+    this.loadMessages();
   }
 
   deleteMessage(id: number) {
@@ -53,21 +54,7 @@ export class MessagesComponent implements OnInit {
   }
 
   loadMessages() {
-    let filteredMessages: Message[] = [
-      {
-        id: 0,
-        senderId: 0,
-        senderKnownAs: '',
-        senderPhotoUrl: '',
-        recipientId: 0,
-        recipientPhotoUrl: '',
-        recipientKnownAs: '',
-        content: '',
-        isRead: true,
-        dateRead: null,
-        messageSent: null,
-      },
-    ];
+    let filteredMessages: Message[] = [];
     this.userService
       .getMessages(this.authService.decodedToken.nameid)
       .subscribe((data) => {
@@ -92,20 +79,18 @@ export class MessagesComponent implements OnInit {
     });
   }
 
-  switchClass(i) {
+  switchClass(userId) {
     const elements = document.getElementsByClassName('user-cell');
     for (var e = 0; e < elements.length; e++) {
       elements[e].classList.remove('active');
     }
-    const classList = document.getElementById(i).classList;
+    const classList = document.getElementById(userId).classList;
     if (!classList.contains('active')) {
-      document.getElementById(i).classList.add('active');
+      document.getElementById(userId).classList.add('active');
     }
-
-    const title = document.getElementById(i).title;
-    this.chatUserId = Number(title);
+    this.chatUserId = Number(userId);
     this.filterMessages();
-    this.switchId = String(i);
+    this.switchId = String(userId);
   }
 
   sendMessage() {
@@ -125,21 +110,7 @@ export class MessagesComponent implements OnInit {
   }
 
   filterMessages() {
-    const filteredMessages: Message[] = [
-      {
-        id: 0,
-        senderId: 0,
-        senderKnownAs: '',
-        senderPhotoUrl: '',
-        recipientId: 0,
-        recipientPhotoUrl: '',
-        recipientKnownAs: '',
-        content: '',
-        isRead: true,
-        dateRead: null,
-        messageSent: null,
-      },
-    ];
+    const filteredMessages: Message[] = [];
     for (const message of this.messages) {
       if (
         (message.recipientId === this.userId &&
@@ -157,16 +128,30 @@ export class MessagesComponent implements OnInit {
     document.getElementById('cells-container').classList.add('hidden');
     document.getElementById('message-body').classList.add('showed');
     document.getElementById('card').style.display = 'block';
-
-    document.getElementById('btn-back').style.display = 'block';
     document.getElementById('btn-back').classList.add('btn-active');
   }
 
   backToUsers() {
     document.getElementById('cells-container').classList.remove('hidden');
     document.getElementById('message-body').classList.remove('showed');
-    document.getElementById('btn-back').style.display = 'none';
     document.getElementById('card').style.display = 'none';
     document.getElementById('btn-back').classList.remove('btn-active');
+  }
+
+  selectUser() {
+    const newUserId = Number(this.selectedUserControl.value);
+    if (!this.ids.includes(newUserId)) {
+      this.ids.unshift(newUserId);
+    }
+    setTimeout(() => {
+      this.switchClass(newUserId);
+    }, 200);
+    setTimeout(() => {
+      document.getElementById(String(newUserId)).classList.add('active');
+    }, 100);
+    document.getElementById('btn-back').classList.add('btn-active');
+
+    this.changeView();
+    this.selectedUserControl.reset();
   }
 }

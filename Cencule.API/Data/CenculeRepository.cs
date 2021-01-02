@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -104,6 +105,26 @@ namespace Cencule.API.Data
                 .ToListAsync();
             return messages;
         }
+
+        public async Task<Statistic> GetStats(int userId)
+        {
+            var messagesSum = _context.Messages
+                .Where(m => m.RecipientId == userId && m.RecipientDeleted == false
+                    || m.SenderId == userId && m.SenderDeleted == false).Count();
+            var blogSum = _context.Blogs.Where(b => b.UserId == userId).Count();
+            var photoSum = _context.Photos.Where(p => p.UserId == userId).Count();
+            var lakesSum = _context.Lakes.Where(l => l.UserId == userId).Count();
+
+            var stats = new Statistic();
+            stats.Blogs = blogSum;
+            stats.UserId = userId;
+            stats.Lakes = lakesSum;
+            stats.Photos = photoSum;
+            stats.Messages = messagesSum;
+
+            return stats;
+        }
+
 
         public async Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId)
         {

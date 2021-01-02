@@ -31,6 +31,15 @@ img {
   margin-left: 30px;
 }
 
+.phone-navbar {
+  display: none;
+}
+
+.active .fa {
+  padding-bottom: 5px;
+  border-bottom: 2px solid rgba(223, 218, 218, 0.692);
+}
+
 @media only screen and (max-width: 600px) {
   .login-form {
     width: 100%;
@@ -40,31 +49,38 @@ img {
   }
   .wrapper {
     flex-wrap: wrap;
-    align-items: center;
-    position: relative;
+    width: 100%;
   }
 
-  a,
-  li {
-    display: inline;
-    width: 30px;
-  }
   ul {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    display: block;
+    display: none;
+  }
+
+  .phone-navbar {
+    display: flex;
+    justify-content: space-around;
     width: 100%;
-    height: 30px;
+    position: absolute;
+    top: 80px;
+    left: 0;
+  }
+
+  .phone-link,
+  .phone-item,
+  .fa {
+    margin: 0 !important;
   }
 
   .fa {
     color: black;
-    margin-left: 20px;
   }
   .active .fa {
     color: rgb(5, 5, 5);
-    padding-right: 3px;
-    border-bottom: 5px solid rgba(243, 12, 12, 0.692);
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(243, 12, 12, 0.692);
+  }
+  .a-logo {
+    display: block;
+    margin-right: 30px;
   }
 }

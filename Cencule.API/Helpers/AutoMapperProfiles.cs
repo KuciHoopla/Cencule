@@ -25,6 +25,7 @@ namespace Cencule.API.Helpers
             CreateMap<Blog, BlogForReturnDto>();
             CreateMap<BlogForUpdateDto, Blog>();
             CreateMap<BlogForCreationDTO, Blog>();
+            CreateMap<Statistic, StatisticDTO>();
             CreateMap<UserForUpdateDto, User>();
             CreateMap<Photo, PhotoForReturnDto>();
             CreateMap<Lake, LakeForReturnDTO>();

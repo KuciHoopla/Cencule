@@ -1,9 +1,8 @@
 .wrapper {
-  padding-top: 70px;
   width: 90%;
   display: flex;
   flex-wrap: wrap;
-  margin: 30px auto 30px;
+  margin: 90px auto 30px;
   height: 90vh;
   overflow: auto;
 }
@@ -25,17 +24,24 @@
 
 app-blog-add {
   position: absolute;
-  top: 70px;
+  top: 90px;
   left: 10px;
   z-index: 2;
 }
 
 @media only screen and (max-width: 600px) {
   .wrapper {
-    padding-top: 140px;
+    width: 90%;
+    margin: 140px auto;
   }
 
   app-blog-add {
-    top: 110px;
+    top: 140px;
+    left: 30px;
+  }
+
+  .card,
+  .card-body {
+    width: 100% !important;
   }
 }

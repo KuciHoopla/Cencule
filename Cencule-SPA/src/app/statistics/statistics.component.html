@@ -1,0 +1,30 @@
+<div class="container">
+  <p>Užívateľov: {{ users.length }}</p>
+  <p>Jazier: {{ lakes.length }}</p>
+  <p>Fotiek: {{ photos.length }}</p>
+  <p>Blogov: {{ blogs.length }}</p>
+</div>
+
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Užívateľ</th>
+        <th scope="col">Správy</th>
+        <th scope="col">Jazerá</th>
+        <th scope="col">Fotky</th>
+        <th scope="col">Blogy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let stats of statisticsForAllUsers; let i = index">
+        <td>{{ stats.userName }}</td>
+        <td>{{ stats.messages }}</td>
+        <td>{{ stats.lakes }}</td>
+
+        <td>{{ stats.photos }}</td>
+        <td>{{ stats.blogs }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

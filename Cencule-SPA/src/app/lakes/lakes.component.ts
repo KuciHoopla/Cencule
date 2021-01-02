@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LakeWall } from '../_models/lakeWall';
 import { User } from '../_models/user';
@@ -14,10 +14,6 @@ export class LakesComponent implements OnInit {
   users: User[];
 
   ngOnInit() {
-    this.getLakes();
-  }
-
-  getLakes() {
     this.route.data.subscribe((data: { lakes: LakeWall[] }) => {
       this.lakes = data.lakes;
     });

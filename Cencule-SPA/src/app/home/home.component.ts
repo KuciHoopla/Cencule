@@ -3,7 +3,6 @@ import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Blog } from '../_models/blog';
 import { User } from '../_models/user';
-import { bgLocale } from 'ngx-bootstrap/chronos';
 
 @Component({
   selector: 'app-home',

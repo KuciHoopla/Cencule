@@ -1,12 +1,26 @@
 <div id="wrapper">
   <div id="cells-container">
+    <div id="select-cell">
+      <select [formControl]="selectedUserControl">
+        <option
+          *ngFor="let user of users"
+          value="{{ user.id }}"
+          [className]="ids.includes(user.id) ? 'filtered' : 'active'"
+        >
+          {{ user.knownAs }}
+        </option>
+      </select>
+      <button id="add-user-btn" class="btn btn-success" (click)="selectUser()">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+      </button>
+    </div>
+
     <div *ngFor="let user of users; let i = index">
       <div
-        id="{{ i }}"
-        title="{{ user.id }}"
+        id="{{ user.id }}"
         class="user-cell d-flex flex-row justify-content-start align-items-center"
         *ngIf="ids.includes(user.id) && user.id !== userId"
-        (click)="switchClass(i)"
+        (click)="switchClass(user.id)"
         (click)="changeView()"
       >
         <img src="{{ user.photoUrl }}" alt="{{ user.knownAs }}" />
@@ -20,7 +34,7 @@
   <div id="message-body">
     <button
       id="btn-back"
-      class="btn btn-outline-secondary"
+      class="btn btn-outline-secondary hide"
       (click)="backToUsers()"
     >
       <i class="fa fa-arrow-left" aria-hidden="true"></i>

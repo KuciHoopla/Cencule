@@ -3,8 +3,7 @@
   width: 90%;
   display: flex;
   flex-wrap: wrap;
-  margin: 30px auto 30px;
-  height: 90vh;
+  margin: 30px auto;
   overflow: auto;
 }
 
@@ -28,4 +27,11 @@ app-blog-add {
   top: 70px;
   left: 10px;
   z-index: 2;
+}
+
+@media only screen and (max-width: 600px) {
+  .card,
+  img {
+    width: 100% !important;
+  }
 }
