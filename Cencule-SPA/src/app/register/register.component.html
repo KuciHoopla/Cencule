@@ -1,5 +1,5 @@
 <form id="register-block" [formGroup]="registerForm" (ngSubmit)="register()">
-  <h2 class="text-center text-primary">Sign Up</h2>
+  <h2 class="text-center text-primary">Registracia</h2>
 
   <hr />
 
@@ -27,21 +27,21 @@
   </div>
 
   <!-- =====
-  user
+  email
   ===== -->
   <div class="form-group">
     <input
       [ngClass]="{
         'is-invalid':
-          registerForm.get('username').errors &&
-          registerForm.get('username').touched
+          registerForm.get('userName').errors &&
+          registerForm.get('userName').touched
       }"
-      type="text"
+      type="email"
       class="form-control is-invalid"
-      formControlName="username"
-      placeholder="Meno"
+      formControlName="userName"
+      placeholder="Mail"
     />
-    <div class="invalid-feedback">Vyber si meno</div>
+    <div class="invalid-feedback">Mail</div>
   </div>
   <!-- =====
   password
@@ -74,7 +74,7 @@
         registerForm.get('password').touched
       "
     >
-      Heslo musí mať aspoň 4 písmená
+      Heslo musí mať aspoň 12 písmen
     </div>
     <div
       class="invalid-feedback"
@@ -83,7 +83,7 @@
         registerForm.get('password').touched
       "
     >
-      Heslo nesmie presiahnuť 8 písmen
+      Heslo nesmie presiahnuť 30 písmen
     </div>
   </div>
 
@@ -111,7 +111,7 @@ confirm password
         registerForm.get('confirmPassword').touched
       "
     >
-      Password is required
+      Heslo je povinne!
     </div>
     <div
       class="invalid-feedback"

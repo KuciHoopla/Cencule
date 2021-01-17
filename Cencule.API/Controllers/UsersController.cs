@@ -20,11 +20,19 @@ namespace Cencule.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly ICenculeRepository _repo;
+        private readonly IAuthRepository _repoAuth;
+        private readonly IAuthRepository _mail;
+        private bool veryfication = false;
+
+
         private readonly IMapper _mapper;
-        public UsersController(ICenculeRepository repo, IMapper mapper)
+        public UsersController(ICenculeRepository repo, IMapper mapper, IAuthRepository repoAuth, IAuthRepository mail)
         {
             _mapper = mapper;
             _repo = repo;
+            _repoAuth = repoAuth;
+            _mail = mail;
+
 
         }
         [HttpGet()]
@@ -43,6 +51,8 @@ namespace Cencule.API.Controllers
 
             return Ok(usersToReturn);
         }
+
+        
         [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
@@ -82,6 +92,57 @@ namespace Cencule.API.Controllers
 
             throw new Exception($"Uloženie zmien člena {idToBlock} zlyhalo");
         }
+
+        [HttpGet("veryfication/{name}/{password}")]
+        public async Task<IActionResult> Veryfication(string name, string password)
+        {
+            var UserFromRepo = await _repoAuth.Login(name.ToLower(), password);
+            if (UserFromRepo != null)
+            {
+                this.veryfication = true;
+                return Ok(new { this.veryfication });
+            }
+            else
+            {
+                this.veryfication = false;
+                return Ok(new { this.veryfication });
+            }
+        }
+
+
+        [HttpPut("change/{id}/{newPassword}")]
+        public async Task<IActionResult> ChangePassword(int id, string newPassword)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            if (veryfication == true)
+            {
+                var userFromRepo = await _repo.GetUser(id);
+                var userWithNewPassword = await _repoAuth.ChangePassword(userFromRepo, newPassword);
+
+                // _mail.Email("skuska");
+
+
+                _mapper.Map(userWithNewPassword, userFromRepo);
+                this.veryfication = false;
+
+                if (await _repo.SaveAll())
+                    return NoContent();
+
+                throw new Exception($"Uloženie zmien člena {userFromRepo.KnownAs} zlyhalo");
+            }
+
+            else
+            {
+
+                return NoContent();
+            }
+
+
+
+        }
+
 
     }
 }

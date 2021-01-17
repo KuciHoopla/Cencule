@@ -1,4 +1,6 @@
 using System;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using Cencule.API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -7,12 +9,16 @@ namespace Cencule.API.Data
 {
     public class AuthRepository : IAuthRepository
     {
+
+
         private readonly DataContext _context;
         public AuthRepository(DataContext context)
         {
             _context = context;
 
         }
+
+
         public async Task<User> Login(string username, string password)
         {
             var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(x => x.Username == username);
@@ -54,6 +60,20 @@ namespace Cencule.API.Data
 
         }
 
+        public async Task<User> ChangePassword(User user, string password)
+        {
+            byte[] passwordHash, passwordSalt;
+            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            return user;
+
+        }
+
+
+
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmoc = new System.Security.Cryptography.HMACSHA512())
@@ -70,6 +90,30 @@ namespace Cencule.API.Data
                 return true;
 
             return false;
+        }
+
+        public async Task<bool> Email(string body)
+        {
+            try
+            {
+                MailMessage message = new MailMessage();
+                SmtpClient smtp = new SmtpClient();
+                message.From = new MailAddress("invoice.rpa.2020@gmail.com");
+                message.To.Add(new MailAddress("jan.kucera@me.com"));
+                message.Subject = "Cencule - Zmena hesla";
+                message.IsBodyHtml = true; //to make message body as html  
+                message.Body = body;
+                smtp.Port = 587;
+                smtp.Host = "smtp.gmail.com"; //for gmail host  
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new NetworkCredential("invoice.rpa.2020@gmail.com", "Automationproject2020");
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.Send(message);
+            }
+            catch (Exception) { }
+
+            return true;
         }
     }
 }

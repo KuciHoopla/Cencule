@@ -23,7 +23,7 @@ namespace Cencule.API.Controllers
 
         }
 
-        [HttpGet]
+        [HttpGet()]
         public async Task<IActionResult> GetLakes()
         {
             var lakes = await _repo.GetLakes();

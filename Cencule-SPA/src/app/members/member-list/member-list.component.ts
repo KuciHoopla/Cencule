@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { User } from '../../_models/user';
 import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
@@ -13,7 +13,9 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./member-list.component.css'],
 })
 export class MemberListComponent implements OnInit {
+  @Output() admin: boolean;
   users: User[];
+
   filteredUsers = [];
   // user: User = JSON.parse(localStorage.getItem('user'));
   userParams: any = {};
@@ -24,10 +26,12 @@ export class MemberListComponent implements OnInit {
   constructor(
     private alertify: AlertifyService,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
+    this.isAdmin();
     this.userId = Number(this.userId);
     this.route.data.subscribe((data: { users: User[] }) => {
       this.users = data.users;
@@ -57,5 +61,18 @@ export class MemberListComponent implements OnInit {
   clear() {
     this.filteredUsers = [];
     this.alertify.error('Vyhľadávanie zrušené');
+  }
+
+  isAdmin() {
+    const activeUserId = this.authService.decodedToken.nameid;
+    let status;
+    this.userService.getUser(activeUserId).subscribe((user: User) => {
+      status = user.admin;
+      if (status === 1) {
+        this.admin = true;
+      } else {
+        this.admin = false;
+      }
+    });
   }
 }

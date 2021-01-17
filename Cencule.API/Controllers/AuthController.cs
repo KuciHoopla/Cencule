@@ -18,6 +18,7 @@ namespace Cencule.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _repo;
+
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
         public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
@@ -33,14 +34,15 @@ namespace Cencule.API.Controllers
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
             if (await _repo.UserExists(userForRegisterDto.Username))
-                return BadRequest("user name already exists");
+                return BadRequest("Mail uz existuje");
 
             var userToCreate = _mapper.Map<User>(userForRegisterDto);
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
-            var userToReturn = _mapper.Map<UserForDetailedDTO>(createdUser); 
+            var userToReturn = _mapper.Map<UserForDetailedDTO>(createdUser);
 
-            return CreatedAtRoute("GetUser", new {controller = "Users", id = createdUser.Id}, userToReturn);
+            return CreatedAtRoute("GetUser", new { controller = "Users", id = createdUser.Id }, userToReturn);
         }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
@@ -74,8 +76,10 @@ namespace Cencule.API.Controllers
             return Ok(new
             {
                 token = tokenHandler.WriteToken(token),
-                user 
+                user
             });
         }
+
+        
     }
 }

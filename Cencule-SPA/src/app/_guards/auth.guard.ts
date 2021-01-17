@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
     if (this.authService.loggedIn()) {
       return true;
     }
-    this.alertify.error('Do not do that!!!');
+    this.alertify.error('Toto neskusaj!!');
     this.router.navigate(['/home']);
     return false;
   }

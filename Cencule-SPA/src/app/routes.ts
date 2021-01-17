@@ -18,12 +18,13 @@ import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MessagesComponent } from './messages/messages.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { StatsResolver } from './_resolvers/stats.resolver';
+import { UsersForBlogsResolver } from './_resolvers/usersForBlogs.resolver';
 
 export const appRoutes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    resolve: { blogs: BlogsResolver },
+    resolve: { blogs: BlogsResolver, usersForBlogs: UsersForBlogsResolver },
     runGuardsAndResolvers: 'always',
   },
   {

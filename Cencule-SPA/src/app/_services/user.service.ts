@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CoreEnvironment } from '@angular/compiler/src/compiler_facade_interface';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../_models/user';
-import { PaginatedResult } from '../_models/pagination';
-import { map } from 'rxjs/operators';
 import { Message } from '../_models/message';
+import { Check } from '../_models/check';
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +33,20 @@ export class UserService {
 
   blockUser(id: number, idToBlock: number, user: User) {
     return this.http.put(this.baseUrl + 'users/' + id + '/' + idToBlock, user);
+  }
+
+  changePassword(id: number, newPassword: string) {
+    return this.http.put(
+      this.baseUrl + 'users/change/' + id + '/' + newPassword,
+      {}
+    );
+  }
+
+  oldPassword(name: string, oldPassword: string) {
+    return this.http.get<Check>(
+      this.baseUrl + 'users/veryfication/' + name + '/' + oldPassword,
+      {}
+    );
   }
 
   setMainPhoto(userId: number, id: number) {
@@ -85,5 +97,9 @@ export class UserService {
         {}
       )
       .subscribe();
+  }
+
+  deleteUser(idUser: number, id: number) {
+    return this.http.delete(this.baseUrl + 'delete/' + idUser + '/' + id);
   }
 }

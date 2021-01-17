@@ -16,7 +16,7 @@
             src="{{ blog.mainUrl }}"
             alt="user photo"
           />
-          <p class="user-name">{{ blog.userName }}</p>
+          <p class="user-name">{{ blog.userName | uppercase}}</p>
         </div>
         <p>{{ blog.description | shorten }}</p>
         <p>{{ blog.dateAdded | timeago }}</p>

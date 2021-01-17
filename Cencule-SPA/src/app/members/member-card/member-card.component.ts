@@ -3,6 +3,7 @@ import { User } from '../../_models/user';
 import { AuthService } from 'src/app/_services/auth.service';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-member-card',
@@ -10,25 +11,18 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
   styleUrls: ['./member-card.component.css'],
 })
 export class MemberCardComponent implements OnInit {
-  @Input()
-  user: User;
+  @Input() admin;
+  @Input() user: User;
   usersUrls: {};
-  admin: boolean;
 
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private router: Router
   ) {}
 
-  ngOnInit() {
-    if (this.authService.decodedToken.nameid === '11') {
-      this.admin = true;
-    } else {
-      this.admin = false;
-    }
-  }
-
+  ngOnInit() {}
 
   blockUser(user: User) {
     this.user = user;
@@ -37,10 +31,10 @@ export class MemberCardComponent implements OnInit {
       .blockUser(this.authService.decodedToken.nameid, this.user.id, this.user)
       .subscribe(
         (next) => {
-          this.alertify.success('User bloknuty');
+          this.alertify.success('Uzivatel zablokovany');
         },
         (error) => {
-          this.alertify.error('Problem bloknut usera');
+          this.alertify.error('Problem zablokovat uzivatela');
         }
       );
   }
@@ -52,11 +46,32 @@ export class MemberCardComponent implements OnInit {
       .blockUser(this.authService.decodedToken.nameid, this.user.id, this.user)
       .subscribe(
         (next) => {
-          this.alertify.success('User odblokovany');
+          this.alertify.success('Uzivatel odblokovany');
         },
         (error) => {
-          this.alertify.error('Problem odbloknut usera');
+          this.alertify.error('Problem odbloknut uzivatela');
         }
       );
+  }
+
+  deleteUser(user: User) {
+    alert('fakt ho chces vymazat?');
+    this.userService
+      .deleteUser(this.authService.decodedToken.nameid, this.user.id)
+      .subscribe(
+        (next) => {
+          this.alertify.success('Uzivatel vymazany');
+        },
+        (error) => {
+          this.alertify.error('Problem vymazat uzivatela');
+        }
+      );
+    setTimeout(() => {
+      this.router
+        .navigateByUrl('app-lists', { skipLocationChange: true })
+        .then(() => {
+          this.router.navigate(['/members']);
+        });
+    }, 1500);
   }
 }

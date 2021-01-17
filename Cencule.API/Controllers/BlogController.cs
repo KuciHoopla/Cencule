@@ -8,12 +8,13 @@ using Microsoft.Extensions.Options;
 using Cencule.API.Dtos;
 using System.Collections;
 using Microsoft.AspNetCore.Cors;
+using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace Cencule.API.Controllers
 {
     [Route("/api/blog")]
     [ApiController]
-
 
     public class BlogController : ControllerBase
     {
@@ -38,7 +39,7 @@ namespace Cencule.API.Controllers
 
         }
 
-        [HttpGet]
+        [HttpGet()]
         public async Task<IActionResult> GetBlogs()
         {
             var blogs = await _repo.GetBlogs();
@@ -58,6 +59,15 @@ namespace Cencule.API.Controllers
 
             return Ok(blogsForWall);
         }
+[HttpGet("users")]
+        public async Task<IActionResult> GetUsers()
+        {
 
+            var users = await _repo.GetUsers();
+            var usersToReturn = _mapper.Map<IEnumerable<UserForBlogDto>>(users);
+
+
+            return Ok(usersToReturn);
+        }
     }
 }

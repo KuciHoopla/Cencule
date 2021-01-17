@@ -59,6 +59,7 @@ namespace Cencule.API.Controllers
         [HttpGet("stats")]   // get number of messages from user
         public async Task<IActionResult> GetUserStats(int userId)
         {
+
             var stats = await _repo.GetStats(userId);
             var statsDto = _mapper.Map<StatisticDTO>(stats);
 

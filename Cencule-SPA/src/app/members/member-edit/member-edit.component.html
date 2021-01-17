@@ -96,6 +96,132 @@
               </div>
             </form>
           </tab>
+          <tab heading="Zmena hesla">
+            <form
+              id="register-block"
+              [formGroup]="changeForm"
+              (ngSubmit)="changePassword()"
+            >
+              <!-- =====old password===== -->
+              <div class="form-group">
+                <input
+                  type="password"
+                  [ngClass]="{
+                    'is-invalid':
+                      changeForm.get('oldPassword').errors &&
+                      changeForm.get('oldPassword').touched
+                  }"
+                  class="form-control is-invalid"
+                  formControlName="oldPassword"
+                  placeholder="Stare heslo"
+                />
+
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    changeForm.get('oldPassword').hasError('required') &&
+                    changeForm.get('oldPassword').touched
+                  "
+                >
+                  Stare heslo musí byť vyplnené
+                </div>
+              </div>
+
+              <!-- =====password===== -->
+              <div class="form-group">
+                <input
+                  type="password"
+                  [ngClass]="{
+                    'is-invalid':
+                      changeForm.get('password').errors &&
+                      changeForm.get('password').touched
+                  }"
+                  class="form-control is-invalid"
+                  formControlName="password"
+                  placeholder="Nove heslo"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    changeForm.get('password').hasError('required') &&
+                    changeForm.get('password').touched
+                  "
+                >
+                  Heslo musí byť vyplnené
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    changeForm.get('password').hasError('minlength') &&
+                    changeForm.get('password').touched
+                  "
+                >
+                  Heslo musí mať aspoň 12 písmen
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    changeForm.get('password').hasError('maxlength') &&
+                    changeForm.get('password').touched
+                  "
+                >
+                  Heslo nesmie presiahnuť 30 písmen
+                </div>
+              </div>
+
+              <!-- =====confirm password===== -->
+              <div class="form-group">
+                <input
+                  [ngClass]="{
+                    'is-invalid':
+                      (changeForm.get('confirmPassword').errors &&
+                        changeForm.get('confirmPassword').touched) ||
+                      (changeForm.get('confirmPassword').touched &&
+                        changeForm.hasError('mismatch'))
+                  }"
+                  type="password"
+                  class="form-control is-invalid"
+                  formControlName="confirmPassword"
+                  placeholder="Zopakuj heslo"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    changeForm.get('confirmPassword').hasError('required') &&
+                    changeForm.get('confirmPassword').touched
+                  "
+                >
+                  Heslo je povinne!
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    changeForm.hasError('mismatch') &&
+                    changeForm.get('confirmPassword').touched
+                  "
+                >
+                  Heslo musí byť rovnaké
+                </div>
+              </div>
+
+              <div class="form-group text-center">
+                <button
+                  class="btn btn-success"
+                  type="submit"
+                  [disabled]="!changeForm.valid"
+                >
+                  Zmenit heslo
+                </button>
+                <button
+                  class="btn btn-danger ml-1"
+                  type="button"
+                  (click)="cancel()"
+                >
+                  Zrušiť
+                </button>
+              </div>
+            </form>
+          </tab>
         </tabset>
       </div>
     </div>

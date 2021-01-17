@@ -20,6 +20,8 @@ namespace Cencule.API.Models
         public string City { get; set; }
         public string Country { get; set; }
         public string Blocked { get; set; }
+        public int Admin { get; set; }
+
 
         public ICollection<Photo> Photos { get; set; }
 

@@ -8,6 +8,14 @@
       src="{{ user.photoUrl || '../../../assets/user.png' }}"
       alt="{{ user.knownAs }}"
     />
+
+    <button
+      *ngIf="admin === true"
+      class="btn delete btn-primary"
+      (click)="deleteUser(user)"
+    >
+      <i class="fa fa-trash-o" aria-hidden="true"></i>
+    </button>
     <ul class="list-item member-icons animate text-center">
       <li class="list-inline-item">
         <button class="btn btn-primary" [routerLink]="['/members/', user.id]">
@@ -43,7 +51,7 @@
   </div>
   <div class="card-body p-1">
     <h6 class="card-title text-center mb-1">
-      <i class="fa fa-user"></i> {{ user?.knownAs }}, {{ user.age }}
+      <i class="fa fa-user"></i> {{ user?.knownAs | uppercase }}, {{ user.age }}
     </h6>
     <p class="card-text text-muted text-center">{{ user?.city }}</p>
   </div>

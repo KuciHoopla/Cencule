@@ -32,6 +32,7 @@ namespace Cencule.API.Helpers
             CreateMap<LakeForCreationDTO, Lake>();
             CreateMap<PhotoForCreationDto, Photo>();
             CreateMap<UserForRegisterDto, User>();
+            CreateMap<User, UserForBlogDto>();
             CreateMap<MessageForCreationDto, Message>().ReverseMap();
             CreateMap<Message, MessageToReturnDto>()
                 .ForMember(m => m.SenderPhotoUrl, opt =>

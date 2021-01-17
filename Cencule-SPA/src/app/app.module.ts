@@ -1,6 +1,4 @@
-import {
-  BrowserModule,
-} from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -57,6 +55,8 @@ import { LakeAddComponent } from './lakeAdd/lakeAdd.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { StatsResolver } from './_resolvers/stats.resolver';
 import { ShortenPipe } from './_pipes/shorten.pipe';
+import { UsersForBlogsResolver } from './_resolvers/usersForBlogs.resolver';
+import { BlogService } from './_services/blog.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -118,6 +118,7 @@ export function tokenGetter() {
     AlertifyService,
     AuthGuard,
     UserService,
+    BlogService,
     PhotoService,
     MemberDetailResolver,
     MemberListResolver,
@@ -131,6 +132,7 @@ export function tokenGetter() {
     LakeService,
     LakesResolver,
     StatsResolver,
+    UsersForBlogsResolver,
   ],
 
   bootstrap: [AppComponent],

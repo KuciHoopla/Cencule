@@ -70,7 +70,6 @@ namespace Cencule.API.Data
         public async Task<User> GetUser(int id)
         {
             var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
-
             return user;
         }
 
@@ -80,8 +79,6 @@ namespace Cencule.API.Data
         {
             return await _context.Users.Include(p => p.Photos).OrderByDescending(u => u.Created)
                  .ToListAsync(); ;
-
-
         }
 
         public async Task<bool> SaveAll()

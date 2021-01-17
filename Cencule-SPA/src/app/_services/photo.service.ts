@@ -14,8 +14,6 @@ export class PhotoService {
   constructor(private http: HttpClient) {}
 
   getPhotos(): Observable<PhotoWall[]> {
-      return this.http
-      .get<PhotoWall[]>(this.baseUrl + 'photos');
+    return this.http.get<PhotoWall[]>(this.baseUrl + 'photos');
   }
 }
-

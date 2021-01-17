@@ -84,7 +84,7 @@
         <img src="{{ photoUrl || '../../assets/user.png' }}" alt="" />
       </span>
       <a class="dropdown-toggle text-light" dropdownToggle>
-        {{ authService.decodedToken?.unique_name | titlecase }}
+        {{ name | titlecase }}
       </a>
 
       <div class="dropdown-menu mt-3" *dropdownMenu>

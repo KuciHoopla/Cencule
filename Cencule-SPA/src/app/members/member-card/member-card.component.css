@@ -11,6 +11,12 @@
   transition-timing-function: ease-out;
 }
 
+.delete {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
 .card-img-wrapper {
   overflow: hidden;
   position: relative;
