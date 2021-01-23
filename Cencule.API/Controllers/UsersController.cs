@@ -25,6 +25,7 @@ namespace Cencule.API.Controllers
         private bool veryfication = false;
 
 
+
         private readonly IMapper _mapper;
         public UsersController(ICenculeRepository repo, IMapper mapper, IAuthRepository repoAuth, IAuthRepository mail)
         {
@@ -52,7 +53,7 @@ namespace Cencule.API.Controllers
             return Ok(usersToReturn);
         }
 
-        
+
         [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
@@ -104,19 +105,18 @@ namespace Cencule.API.Controllers
             }
             else
             {
-                this.veryfication = false;
                 return Ok(new { this.veryfication });
             }
         }
 
 
-        [HttpPut("change/{id}/{newPassword}")]
-        public async Task<IActionResult> ChangePassword(int id, string newPassword)
+        [HttpPut("change/{id}/{newPassword}/{veryfication}")]
+        public async Task<IActionResult> ChangePassword(int id, string newPassword, string veryfication)
         {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            if (veryfication == true)
+            if (veryfication == "ok")
             {
                 var userFromRepo = await _repo.GetUser(id);
                 var userWithNewPassword = await _repoAuth.ChangePassword(userFromRepo, newPassword);
@@ -125,10 +125,9 @@ namespace Cencule.API.Controllers
 
 
                 _mapper.Map(userWithNewPassword, userFromRepo);
-                this.veryfication = false;
 
                 if (await _repo.SaveAll())
-                    return NoContent();
+                    return Ok();
 
                 throw new Exception($"Uloženie zmien člena {userFromRepo.KnownAs} zlyhalo");
             }
@@ -137,6 +136,7 @@ namespace Cencule.API.Controllers
             {
 
                 return NoContent();
+
             }
 
 

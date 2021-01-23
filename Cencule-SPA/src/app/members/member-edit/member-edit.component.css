@@ -24,6 +24,21 @@
   margin-top: 110px;
 }
 
+.veryfication-ok {
+  display: none;
+}
+
+.veryfication-false {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #d9831f;
+}
+
+.input-ok {
+  color: rgba(44, 167, 44, 0.541);
+}
+
 @media only screen and (max-width: 600px) {
   .card-img-top {
     display: none;

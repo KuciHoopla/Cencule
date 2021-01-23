@@ -88,7 +88,7 @@ namespace Cencule.API.Controllers
                 var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
                 return CreatedAtRoute("GetPhoto", new { userId = userId, id = photo.Id }, photoToReturn);
             }
-            return BadRequest("Colud not add the photo");
+            return BadRequest("Nepodarilo sa pridat fotku");
         }
 
         [HttpPost("{id}/setMain")]
@@ -104,7 +104,7 @@ namespace Cencule.API.Controllers
             var photoFromRepo = await _repo.GetPhoto(id);
 
             if (photoFromRepo.IsMain)
-                return BadRequest("This is already main photo");
+                return BadRequest("Toto uz je hlavna fotka");
 
             var currentMainPhoto = await _repo.GetMainPhotoFromUser(userId);
             currentMainPhoto.IsMain = false;
@@ -114,7 +114,7 @@ namespace Cencule.API.Controllers
             if (await _repo.SaveAll())
                 return NoContent();
 
-            return BadRequest("Could not set photo for main");
+            return BadRequest("Nepodarilo sa zadat fotku ako hlavnu");
         }
 
         [HttpDelete("{id}")]
@@ -130,7 +130,7 @@ namespace Cencule.API.Controllers
             var photoFromRepo = await _repo.GetPhoto(id);
 
             if (photoFromRepo.IsMain)
-                return BadRequest("This is main photo");
+                return BadRequest("Toto je hlavna fotka");
 
             if (photoFromRepo.PublicId != null)
             {
@@ -153,7 +153,7 @@ namespace Cencule.API.Controllers
             if (await _repo.SaveAll())
                 return Ok();
 
-            return BadRequest("Failed to delete the photo");
+            return BadRequest("Vymazanie fotky zlyhalo");
         }
     }
 }

@@ -15,4 +15,13 @@ table {
   width: 70%;
 }
 
-
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    width: 100%;
+  }
+  table {
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+  }
+}

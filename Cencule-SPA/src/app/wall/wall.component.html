@@ -1,8 +1,8 @@
 <div class="wrapper">
+  <a id="add-photo" [routerLink]="['/member/edit']">
+    <i class="fa fa-pencil" aria-hidden="true"></i
+  ></a>
   <div id="photos-block" class="wall-line">
-    <a id="add-photo" [routerLink]="['/member/edit']">
-      <i class="fa fa-pencil" aria-hidden="true"></i
-    ></a>
     <div
       id="card{{ i }}"
       *ngFor="let photo of photos; let last = last; let i = index"

@@ -1,37 +1,57 @@
 .wrapper {
   padding-top: 90px;
   width: 90%;
-  display: flex;
-  flex-wrap: wrap;
+  display: block;
   margin: 30px auto;
   overflow: auto;
 }
 
-.hidden {
-  display: none;
+.blog-card {
+  display: flex;
+  width: 90%;
+  margin: 50px;
+  border: 1px solid rgba(87, 84, 84, 0.205);
 }
+
+.blog-img {
+  width: 40%;
+  height: auto;
+  max-width: 400px;
+}
+
+.blog-body {
+  display: block;
+  width: 50%;
+  margin: 10px 30px;
+}
+
 .user-name {
   margin: 10px;
   font-weight: bold;
 }
 
-.userMainPhoto {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  margin: 5px;
-}
-
-app-blog-add {
-  position: absolute;
-  top: 70px;
-  left: 10px;
-  z-index: 2;
-}
-
 @media only screen and (max-width: 600px) {
-  .card,
-  img {
-    width: 100% !important;
+  .wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .blog-card {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  .blog-body {
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+  }
+
+  .blog-img {
+    width: 100%;
+    height: auto;
   }
 }

@@ -23,7 +23,7 @@ export class MemberEditComponent implements OnInit {
   @ViewChild('editForm', { static: true }) editForm: NgForm;
   changeForm: FormGroup;
   user: User;
-  check: Check = { veryfication: false };
+  veryfication = false;
   newPassword: string;
   photoUrl: string;
   @HostListener('window:beforeunload', ['$event'])
@@ -71,37 +71,34 @@ export class MemberEditComponent implements OnInit {
   changePassword() {
     if (this.changeForm.valid) {
       this.newPassword = Object.assign({}, this.changeForm.value).password;
-      let oldPassword = Object.assign({}, this.changeForm.value).oldPassword;
-          console.log(this.check.veryfication);
-
-
+      const oldPassword = Object.assign({}, this.changeForm.value).oldPassword;
+      let acceptance = 'no';
+      let veryfication: boolean;
       this.userService
         .oldPassword(this.user.username, oldPassword)
         .subscribe((data) => {
-          this.check = data;
-          console.log(this.check.veryfication)
+          veryfication = data.veryfication;
+          if (veryfication) {
+            acceptance = 'ok';
+            this.userService
+              .changePassword(
+                this.authService.decodedToken.nameid,
+                this.newPassword,
+                acceptance
+              )
+              .subscribe(
+                (next) => {
+                  this.alertify.success('heslo zmenene');
+                  this.changeForm.reset();
+                  this.newPassword = '';
+                },
+                (error) => {
+                  this.alertify.error('Nepodarilo sa zmenit heslo');
+                  this.newPassword = '';
+                }
+              );
+          }
         });
-
-      if (this.check.veryfication) {
-        this.userService
-          .changePassword(
-            this.authService.decodedToken.nameid,
-            this.newPassword
-          )
-          .subscribe(
-            (next) => {
-              this.alertify.success('heslo zmenene');
-              this.changeForm.reset();
-              this.newPassword = '';
-            },
-            (error) => {
-              this.alertify.error('nepodarilo sa zmenit heslo');
-              this.newPassword = '';
-            }
-          );
-      } else {
-        this.alertify.error('zadal si nespravne stare heslo');
-      }
     }
   }
 
@@ -141,5 +138,15 @@ export class MemberEditComponent implements OnInit {
     return g.get('password').value === g.get('confirmPassword').value
       ? null
       : { mismatch: true };
+  }
+
+  oldPasswordCheck() {
+    const oldPassword = Object.assign({}, this.changeForm.value).oldPassword;
+    this.userService
+      .oldPassword(this.user.username, oldPassword)
+      .subscribe((data) => {
+        this.veryfication = data.veryfication;
+        console.log(this.veryfication);
+      });
   }
 }

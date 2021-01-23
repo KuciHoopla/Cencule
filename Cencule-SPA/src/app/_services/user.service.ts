@@ -35,9 +35,15 @@ export class UserService {
     return this.http.put(this.baseUrl + 'users/' + id + '/' + idToBlock, user);
   }
 
-  changePassword(id: number, newPassword: string) {
+  changePassword(id: number, newPassword: string, veryfication: string) {
     return this.http.put(
-      this.baseUrl + 'users/change/' + id + '/' + newPassword,
+      this.baseUrl +
+        'users/change/' +
+        id +
+        '/' +
+        newPassword +
+        '/' +
+        veryfication,
       {}
     );
   }

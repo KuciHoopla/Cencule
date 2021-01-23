@@ -105,15 +105,19 @@
               <!-- =====old password===== -->
               <div class="form-group">
                 <input
+                  [ngClass]="{
+                    'input-ok': veryfication
+                  }"
                   type="password"
+                  class="form-control is-invalid"
+                  formControlName="oldPassword"
+                  placeholder="Stare heslo"
                   [ngClass]="{
                     'is-invalid':
                       changeForm.get('oldPassword').errors &&
                       changeForm.get('oldPassword').touched
                   }"
-                  class="form-control is-invalid"
-                  formControlName="oldPassword"
-                  placeholder="Stare heslo"
+                  (keyup)="oldPasswordCheck()"
                 />
 
                 <div
@@ -123,7 +127,16 @@
                     changeForm.get('oldPassword').touched
                   "
                 >
-                  Stare heslo musí byť vyplnené
+                  Stare heslo musí byť vyplnené!
+                </div>
+
+                <div
+                  [ngClass]="{
+                    'veryfication-false': !veryfication,
+                    'veryfication-ok': veryfication
+                  }"
+                >
+                  Stare heslo nie je spravne!
                 </div>
               </div>
 
@@ -191,7 +204,7 @@
                     changeForm.get('confirmPassword').touched
                   "
                 >
-                  Heslo je povinne!
+                  Heslo musi byt zopakovane!
                 </div>
                 <div
                   class="invalid-feedback"
@@ -208,7 +221,7 @@
                 <button
                   class="btn btn-success"
                   type="submit"
-                  [disabled]="!changeForm.valid"
+                  [disabled]="!changeForm.valid || !veryfication"
                 >
                   Zmenit heslo
                 </button>
