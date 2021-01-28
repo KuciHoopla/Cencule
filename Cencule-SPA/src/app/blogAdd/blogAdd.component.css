@@ -1,8 +1,29 @@
+#add-blog-btn {
+  margin-left: 10px;
+}
+
 #add-blog-block {
   display: none;
   background-color: white;
   padding: 20px;
   box-shadow: 5px 5px 10px rgba(17, 17, 17, 0.685);
+}
+
+.form-label-file:hover {
+  background-color: #042c52dc;
+}
+
+.form-label-file {
+  cursor: pointer;
+  width: 100px;
+  color: whitesmoke;
+  background-color: #008cba;
+  text-align: center;
+  padding: 12px 0;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.295);
+  display: block;
+  margin: 0 auto;
 }
 
 .wrapper {

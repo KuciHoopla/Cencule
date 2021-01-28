@@ -13,7 +13,17 @@
           Tu presuň fotky
         </div>
 
-        <input type="file" ng2FileSelect [uploader]="uploader" />
+        <div class="mb-3">
+          <label for="formFile" class="form-label-file">Vyber fotku</label>
+          <input
+            class="form-control"
+            type="file"
+            id="formFile"
+            style="display: none"
+            ng2FileSelect
+            [uploader]="uploader"
+          />
+        </div>
       </div>
 
       <div

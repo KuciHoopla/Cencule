@@ -23,9 +23,10 @@
 }
 
 app-blog-add {
+  width: 100%;
   position: absolute;
   top: 90px;
-  left: 10px;
+  left: 0;
   z-index: 2;
 }
 
@@ -37,7 +38,6 @@ app-blog-add {
 
   app-blog-add {
     top: 140px;
-    left: 30px;
   }
 
   .card,

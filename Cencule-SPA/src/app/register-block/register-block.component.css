@@ -8,6 +8,7 @@
   .register {
     position: absolute;
     left: 10px;
-    top: 50px;
+    top: 0;
+    max-width: 100%;
   }
 }

@@ -23,12 +23,21 @@
       placeholder="pridaj pribeh"
     >
     </textarea>
-    <input type="file" ng2FileSelect [uploader]="uploader" />
-    <div class="invalid-feedback">Zdieľaj príbeh</div>
+    <div id="choose-area" class="mb-3">
+      <label for="formFile" class="form-label-file mt-2">Vyber fotku</label>
+      <input
+        class="form-control"
+        type="file"
+        id="formFile"
+        style="display: none"
+        ng2FileSelect
+        [uploader]="uploader"
+      />
+    </div>
   </div>
 
   <div>
-    <div *ngIf="uploader.progress > 0" class="progress mb-4">
+    <div class="progress mb-4">
       <div
         class="progress-bar"
         role="progressbar"

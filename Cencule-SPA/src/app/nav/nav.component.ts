@@ -29,7 +29,12 @@ export class NavComponent implements OnInit {
   getUserName() {
     this.name = '';
     const user = JSON.parse(localStorage.getItem('user'));
-    this.name = user.knownAs;
+    try {
+      this.name = user.knownAs;
+    } catch (error) {
+      // tslint:disable-next-line: no-unused-expression
+      ('neprihlaseny');
+    }
   }
 
   login() {
@@ -62,5 +67,20 @@ export class NavComponent implements OnInit {
     this.alertify.message('odhlaseny');
     this.router.navigate(['/home']);
     this.name = '';
+  }
+
+  resetPassword() {
+    alert('Naozaj chces resetovat heslo?');
+
+    const emailValidity = this.validateEmail(this.model.username);
+    if (emailValidity) {
+    } else {
+      alert('Zly format emailu!');
+    }
+  }
+
+  validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
   }
 }

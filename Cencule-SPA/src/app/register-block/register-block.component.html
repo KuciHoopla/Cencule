@@ -1,5 +1,9 @@
-<button *ngIf="!registerMode" class="btn-info ml-2" (click)="registerToggle()">
-  Zaregistruj sa
+<button
+  *ngIf="!registerMode"
+  class="btn btn-secondary ml-2"
+  (click)="registerToggle()"
+>
+  Registracia
 </button>
 
 <div *ngIf="registerMode" class="container register bg-light position-absolute">

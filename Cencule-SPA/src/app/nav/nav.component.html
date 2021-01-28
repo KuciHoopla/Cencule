@@ -4,12 +4,10 @@
       <img class="logo" src="{{ '../../assets/CenculeBrand.png' }}" alt="" />
     </a>
     <app-weather></app-weather>
-
     <app-register-block
       class="reg-block"
       *ngIf="!loggedIn()"
     ></app-register-block>
-
     <!-- links for standard view -->
 
     <ul *ngIf="loggedIn()" class="navbar-nav ml-1">
@@ -106,9 +104,11 @@
     >
       <input
         class="form-control mr-sm-2"
-        type="text"
+        type="email"
+        maxlength="30"
+        minlength="7"
         name="username"
-        placeholder="Meno"
+        placeholder="Email"
         required
         [(ngModel)]="model.username"
       />
@@ -128,5 +128,12 @@
         Prihlásiť sa
       </button>
     </form>
+    <button
+      *ngIf="!loggedIn() && !model.password && model.username"
+      class="btn btn-danger my-2 my-sm-0 ml-1"
+      (click)="resetPassword()"
+    >
+      Zabudnute heslo
+    </button>
   </div>
 </nav>

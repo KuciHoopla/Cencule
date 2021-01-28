@@ -3,10 +3,33 @@ img.img-thumbnail {
   min-width: 150px !important;
   margin: 2px;
 }
-.nv-file-over{
+.nv-file-over {
   border: dotted 3px red;
 }
 
-input[type=file]{
+.form-label-file:hover {
+  background-color: #042c52dc;
+}
+
+.form-label-file {
+  cursor: pointer;
+  width: 100px;
+  color: whitesmoke;
+  background-color: #008cba;
+  text-align: center;
+  padding: 12px 0;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.295);
+  display: block;
+  margin: 0 auto;
+}
+
+input[type="file"] {
   color: transparent;
+}
+
+@media only screen and (max-width: 600px) {
+  .my-drop-zone {
+    display: none;
+  }
 }
