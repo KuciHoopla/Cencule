@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Cencule.API.Data;
@@ -110,6 +111,8 @@ namespace Cencule.API.Controllers
         }
 
 
+
+
         [HttpPut("change/{id}/{newPassword}/{veryfication}")]
         public async Task<IActionResult> ChangePassword(int id, string newPassword, string veryfication)
         {
@@ -121,9 +124,6 @@ namespace Cencule.API.Controllers
                 var userFromRepo = await _repo.GetUser(id);
                 var userWithNewPassword = await _repoAuth.ChangePassword(userFromRepo, newPassword);
 
-                // _mail.Email("skuska");
-
-
                 _mapper.Map(userWithNewPassword, userFromRepo);
 
                 if (await _repo.SaveAll())
@@ -131,13 +131,49 @@ namespace Cencule.API.Controllers
 
                 throw new Exception($"Uloženie zmien člena {userFromRepo.KnownAs} zlyhalo");
             }
-
             else
             {
-
                 return NoContent();
-
             }
+        }
+
+
+        [HttpPut("reset/{email}")]
+        public async Task<IActionResult> ResetPassword(string email)
+        {
+            StringBuilder str_build = new StringBuilder();
+            Random random = new Random();
+
+            char letter;
+
+            for (int i = 0; i < 12; i++)
+            {
+                double flt = random.NextDouble();
+                int shift = Convert.ToInt32(Math.Floor(25 * flt));
+                letter = Convert.ToChar(shift + 65);
+                str_build.Append(letter);
+            }
+
+            var newPassword = str_build.ToString();
+
+            var id = await _repoAuth.UserEmail(email);
+
+
+            var userFromRepo = await _repo.GetUser(id);
+            var userWithNewPassword = await _repoAuth.ChangePassword(userFromRepo, newPassword);
+
+            await _mail.Email(newPassword);
+
+
+            _mapper.Map(userWithNewPassword, userFromRepo);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            throw new Exception($"Uloženie zmien člena {userFromRepo.KnownAs} zlyhalo");
+
+
+
 
 
 

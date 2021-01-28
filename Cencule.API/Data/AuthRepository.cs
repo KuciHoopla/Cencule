@@ -92,6 +92,20 @@ namespace Cencule.API.Data
             return false;
         }
 
+        public async Task<int> UserEmail(string username)
+        {
+            if (await _context.Users.AnyAsync(x => x.Username == username))
+            {
+
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+                return user.Id;
+            }
+                
+
+            return -1;
+        }
+
+
         public async Task<bool> Email(string body)
         {
             try
