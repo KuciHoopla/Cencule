@@ -18,14 +18,20 @@ namespace Cencule.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _repo;
+        private readonly ICenculeRepository _repoCencule;
+
 
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
-        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
+        public AuthController(IAuthRepository repo, IConfiguration config,
+                              IMapper mapper, ICenculeRepository repoCencule)
         {
             _mapper = mapper;
             _config = config;
             _repo = repo;
+            _repoCencule = repoCencule;
+
+
 
         }
         [HttpPost("register")]
@@ -80,6 +86,46 @@ namespace Cencule.API.Controllers
             });
         }
 
-        
+
+        [HttpPost("reset/{email}")]
+        public async Task<IActionResult> ResetPassword(string email)
+        {
+            StringBuilder str_build = new StringBuilder();
+            Random random = new Random();
+            char letter;
+            for (int i = 0; i < 12; i++)
+            {
+                double flt = random.NextDouble();
+                int shift = Convert.ToInt32(Math.Floor(25 * flt));
+                letter = Convert.ToChar(shift + 65);
+                str_build.Append(letter);
+            }
+
+            var newPassword = str_build.ToString();
+
+            var id = await _repo.UserId(email);
+
+
+            var userFromRepo = await _repoCencule.GetUser(id);
+            var userWithNewPassword = await _repo.ChangePassword(userFromRepo, newPassword);
+
+            await _repo.Email(newPassword);
+
+
+            _mapper.Map(userWithNewPassword, userFromRepo);
+
+            if (await _repoCencule.SaveAll())
+                return Ok();
+
+            throw new Exception($"Reset hesla pre {email} zlyhalo");
+
+
+
+
+
+
+        }
+
+
     }
 }

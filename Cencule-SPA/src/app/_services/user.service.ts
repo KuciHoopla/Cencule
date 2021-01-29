@@ -55,6 +55,10 @@ export class UserService {
     );
   }
 
+  resetPassword(email: string) {
+    return this.http.post(this.baseUrl + 'auth/reset/' + email, {});
+  }
+
   setMainPhoto(userId: number, id: number) {
     return this.http.post(
       this.baseUrl + 'users/' + userId + '/photos/' + id + '/setMain',
