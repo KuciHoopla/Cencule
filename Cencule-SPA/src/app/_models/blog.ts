@@ -1,6 +1,7 @@
 export interface Blog {
   id: number;
   url: string;
+  title?: string;
   description: string;
   dateAdded: Date;
   publicId: number;

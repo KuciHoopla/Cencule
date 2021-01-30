@@ -10,13 +10,15 @@
   display: flex;
   width: 90%;
   margin: 50px;
-  border: 1px solid rgba(87, 84, 84, 0.205);
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.123);
+  border-radius: 10px;
 }
 
 .blog-img {
   width: 40%;
   height: auto;
   max-width: 400px;
+  border-radius: 10px 0 0 10px;
 }
 
 .blog-body {
@@ -42,6 +44,8 @@
     width: 100%;
     margin: 0;
     margin-bottom: 10px;
+    box-shadow: none;
+    border-radius: none;
   }
 
   .blog-body {
@@ -53,5 +57,6 @@
   .blog-img {
     width: 100%;
     height: auto;
+    border-radius: 0 0 0 0;
   }
 }

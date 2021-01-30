@@ -40,6 +40,7 @@ export class BlogAddComponent implements OnInit {
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
   blocked: string;
+  admin = false;
   user: User;
   userId = this.authService.decodedToken.nameid;
   blogAddForm: FormGroup;
@@ -63,6 +64,7 @@ export class BlogAddComponent implements OnInit {
   createBlogAddForm() {
     this.blogAddForm = this.fb.group({
       description: ['', Validators.required],
+      title: ['', Validators.required],
     });
   }
 
@@ -74,17 +76,21 @@ export class BlogAddComponent implements OnInit {
 
   isBlocked() {
     let blocked;
+    let admin;
     this.userService.getUser(this.userId).subscribe((data: User) => {
       blocked = data.blocked;
       if (blocked === '0') {
         this.blocked = blocked;
+      }
+      admin = data.admin;
+      if (admin === 1) {
+        this.admin = true;
       }
     });
   }
 
   cancel() {
     this.cancelblogAdd.emit(false);
-    // document.getElementById('add-blog-block').style.display = 'none';
     document.getElementById('add-blog-btn').style.display = 'block';
     document.getElementById('add-blog-block').style.display = 'none';
     this.alertify.warning('canceled');
@@ -115,6 +121,7 @@ export class BlogAddComponent implements OnInit {
             url: res.url,
             dateAdded: res.dateAdded,
             description: res.description,
+            title: res.title,
             publicId: null,
             user: '',
             userId: this.userId,

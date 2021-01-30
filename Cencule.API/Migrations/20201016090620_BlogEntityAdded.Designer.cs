@@ -30,6 +30,9 @@ namespace Cencule.API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Title")
+                    .HasColumnType("TEXT");
+
                     b.Property<string>("MainUrl")
                         .HasColumnType("TEXT");
 
@@ -182,7 +185,7 @@ namespace Cencule.API.Migrations
                     b.ToTable("Users");
                 });
 
-         
+
             modelBuilder.Entity("Cencule.API.Models.Blog", b =>
                 {
                     b.HasOne("Cencule.API.Models.User", "User")
@@ -192,7 +195,7 @@ namespace Cencule.API.Migrations
                         .IsRequired();
                 });
 
-          
+
             modelBuilder.Entity("Cencule.API.Models.Message", b =>
                 {
                     b.HasOne("Cencule.API.Models.User", "Recipient")

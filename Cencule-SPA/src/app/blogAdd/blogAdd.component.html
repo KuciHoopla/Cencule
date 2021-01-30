@@ -9,6 +9,18 @@
 
 <form id="add-blog-block" [formGroup]="blogAddForm" (ngSubmit)="blogAdd()">
   <div class="form-group">
+    <input
+      *ngIf="admin"
+      [ngClass]="{
+        'is-invalid':
+          blogAddForm.get('title').errors && blogAddForm.get('title').touched
+      }"
+      type="text"
+      class="form-control"
+      formControlName="title"
+      placeholder="nadpis"
+    />
+
     <textarea
       rows="10"
       maxlength="500"

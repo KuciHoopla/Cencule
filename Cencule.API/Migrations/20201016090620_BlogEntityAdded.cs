@@ -16,6 +16,7 @@ namespace Cencule.API.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Url = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
                     DateAdded = table.Column<DateTime>(nullable: false),
                     PublicId = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
