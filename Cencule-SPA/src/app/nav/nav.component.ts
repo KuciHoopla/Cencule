@@ -74,16 +74,18 @@ export class NavComponent implements OnInit {
   resetPassword() {
     const emailValidity = this.validateEmail(this.model.username);
     if (emailValidity) {
-      alert('Naozaj chces resetovat heslo?');
-      this.userService.resetPassword(this.model.username).subscribe();
-      console.log(this.model.username);
-      this.alertify.success('Nove heslo zaslane na email.');
+      if (window.confirm('Naozaj chces resetovat heslo pre tento email?')) {
+        this.userService.resetPassword(this.model.username).subscribe();
+        this.alertify.success('Nove heslo bolo zaslane na email.');
+      } else {
+        this.alertify.error('Zrusene');
+      }
     } else {
       alert('Zly format emailu!');
     }
   }
 
-  validateEmail(email) {
+  validateEmail(email: string) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   }
