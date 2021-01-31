@@ -13,7 +13,7 @@
     <ul *ngIf="loggedIn()" class="navbar-nav ml-1">
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/home']"
-          ><i class="fa fa-snowflake-o"></i
+          ><i class="fa fa-home" aria-hidden="true"></i
         ></a>
       </li>
       <li class="nav-item" routerLinkActive="active">
@@ -47,7 +47,7 @@
     <div *ngIf="loggedIn()" class="phone-navbar">
       <div class="phone-item" routerLinkActive="active">
         <a class="phone-link" [routerLink]="['/home']"
-          ><i class="fa fa-snowflake-o"></i
+          ><i class="fa fa-home" aria-hidden="true"></i
         ></a>
       </div>
       <div class="phone-item" routerLinkActive="active">

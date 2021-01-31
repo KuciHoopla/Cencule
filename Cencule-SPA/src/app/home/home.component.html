@@ -2,7 +2,7 @@
   <div *ngFor="let blog of adminBlogs" class="blog-card">
     <img class="blog-img" src="{{ blog.url }}" alt="Card image cap" />
     <div class="blog-body">
-      <h1 class="fw-bolder">{{ blog.title }}</h1>
+      <h2 class="fw-bolder title">{{ blog.title }}</h2>
       <p>{{ blog.description }}</p>
       <small>{{ blog.dateAdded | date }}</small>
     </div>

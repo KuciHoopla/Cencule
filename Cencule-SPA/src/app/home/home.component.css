@@ -8,7 +8,7 @@
 
 .blog-card {
   display: flex;
-  width: 90%;
+  width: 70%;
   margin: 50px;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.123);
   border-radius: 10px;
@@ -27,6 +27,13 @@
   margin: 10px 30px;
 }
 
+.title {
+  color: rgba(16, 80, 133, 0.678);
+  font-weight: 800;
+  text-align: center;
+  padding: 20px;
+}
+
 .user-name {
   margin: 10px;
   font-weight: bold;
@@ -38,6 +45,7 @@
     display: flex;
     flex-wrap: wrap;
   }
+
   .blog-card {
     display: flex;
     flex-wrap: wrap;
