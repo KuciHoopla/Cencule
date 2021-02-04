@@ -100,7 +100,7 @@ namespace Cencule.API.Data
                 return user.Id;
             }
             catch (Exception) { }
-            
+
             return -1;
 
         }
@@ -121,7 +121,7 @@ namespace Cencule.API.Data
                 smtp.Host = "smtp.gmail.com"; //for gmail host  
                 smtp.EnableSsl = true;
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new NetworkCredential("invoice.rpa.2020@gmail.com", "Automationproject2020");
+                smtp.Credentials = new NetworkCredential("", "");
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtp.Send(message);
             }
