@@ -112,8 +112,8 @@ namespace Cencule.API.Data
             {
                 MailMessage message = new MailMessage();
                 SmtpClient smtp = new SmtpClient();
-                message.From = new MailAddress("invoice.rpa.2020@gmail.com");
-                message.To.Add(new MailAddress("jan.kucera@me.com"));
+                message.From = new MailAddress("");
+                message.To.Add(new MailAddress(""));
                 message.Subject = "Cencule - Zmena hesla";
                 message.IsBodyHtml = true; //to make message body as html  
                 message.Body = body;
